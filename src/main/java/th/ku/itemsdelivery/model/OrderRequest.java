@@ -28,5 +28,6 @@ public class OrderRequest {
     private LocalDateTime deliveryDatetime;
 
     @ManyToOne
+    @JoinColumn(name="customer_id", referencedColumnName="id")
     private Customer customer;
 }

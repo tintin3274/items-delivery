@@ -1,4 +1,4 @@
-package th.ku.itemsdelivery.repositories;
+package th.ku.itemsdelivery.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

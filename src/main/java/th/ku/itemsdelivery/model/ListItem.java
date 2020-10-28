@@ -4,25 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "list_item")
 public class ListItem {
-    @Id
-    @ManyToOne
-    @JoinColumn(name="order_id", referencedColumnName="id")
-    private OrderRequest orderRequest;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name="item_id", referencedColumnName="id")
-    private Item item;
+    @EmbeddedId
+    private ListItemId listItemId;
 
     private int quantity;
 }
