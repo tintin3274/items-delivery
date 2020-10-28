@@ -5,24 +5,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Item {
+public class ItemImport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
-    private String name;
+    @ManyToOne
+    @JoinColumn(name="item_id", referencedColumnName="id")
+    private Item item;
 
-    @NotBlank
-    private String unit;
-
-    private String description;
-    private int quantity;
-    private int required;
+    private int importQuantity;
+    private LocalDateTime importDatetime;
 }
