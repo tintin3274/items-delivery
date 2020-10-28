@@ -12,17 +12,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@IdClass(ItemExportId.class)
+@Table(name = "item_export")
 public class ItemExport {
-    @Id
-    @ManyToOne
-    @JoinColumn(name="order_id", referencedColumnName="id")
-    private OrderRequest orderRequest;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name="item_id", referencedColumnName="id")
-    private Item item;
+    @EmbeddedId
+    private ItemExportId itemExportId;
 
     private int exportQuantity;
     private LocalDateTime exportDatetime;
