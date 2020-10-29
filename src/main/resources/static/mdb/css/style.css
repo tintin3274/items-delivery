@@ -1,0 +1,10 @@
+.btn-mystyle{
+    color:#007bff;border-color:#007bff
+}
+.btn-mystyle:hover{
+    color:#fff;background-color:#007bff;border-color:#007bff
+}
+.btn-round{
+    border-radius: 360px;
+}
+
