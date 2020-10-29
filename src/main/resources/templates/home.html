@@ -5,41 +5,49 @@
 
 
 <div layout:fragment="content" class="container">
-
+    <div  id="fill">
+        <select id='filterText' style='display:inline-block' onchange='filterText()'>
+            <option disabled selected>Select Status</option>
+            <option value='pending'>Pending - Ready</option>
+            <option value='in progress'>In progress</option>
+            <option value=''>All</option>
+        </select>
+    </div>
 <!-- Start your project here-->
+
     <table id="selectedColumn" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
         <thead>
         <tr>
-            <th class="th-sm">Name
+            <th class="th-sm">ID
             </th>
-            <th class="th-sm">Position
+            <th class="th-sm">Order Name
             </th>
-            <th class="th-sm">Office
+            <th class="th-sm">Status
             </th>
-            <th class="th-sm">Age
+            <th class="th-sm">Date-In
             </th>
-            <th class="th-sm">Start date
+            <th class="th-sm">Date-Out
             </th>
-            <th class="th-sm">Salary
-            </th>
+
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>Tiger Nixon</td>
             <td>System Architect</td>
-            <td>Edinburgh</td>
+            <td>Pending</td>
             <td>61</td>
             <td>2011/04/25</td>
-            <td>$320,800</td>
+
         </tr>
         <tr>
             <td>Garrett Winters</td>
             <td>Accountant</td>
-            <td>Tokyo</td>
+            <td>in progress</td>
             <td>63</td>
             <td>2011/07/25</td>
-            <td>$170,750</td>
+
         </tr>
 
         </tbody>
@@ -55,8 +63,7 @@
             </th>
             <th>Start date
             </th>
-            <th>Salary
-            </th>
+
         </tr>
         </tfoot>
     </table>
@@ -75,20 +82,44 @@
     <!-- MDBootstrap Datatables  -->
     <script type="text/javascript" src="/mdb/js/addons/datatables.min.js"></script>
 
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<!--    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+    <script>
+        function filterText()
+        {
+            var rex = new RegExp($('#filterText').val());
+            if(rex =="/all/"){clearFilter()}else{
+                $('.content').hide();
+                $('.content').filter(function() {
+                    return rex.test($(this).text());
+                }).show();
+            }
+        }
 
+        function clearFilter()
+        {
+            $('.filterText').val('');
+            $('.content').show();
+        }
+    </script>
     <script>
         $(document).ready(function () {
             $('#selectedColumn').DataTable({
                 "aaSorting": [],
                 columnDefs: [{
                     orderable: false,
-                    targets: 3
+                    targets: 0
                 }]
             });
             $('.dataTables_length').addClass('bs-select');
         });
     </script>
+    <script>
+        $('#filterText').on('keyup change',function () {
+        var table= $('#selectedColumn').DataTable();
+            table.columns(2).search(this.value).draw();
+        });
+    </script>
+
 
 </div>
 
