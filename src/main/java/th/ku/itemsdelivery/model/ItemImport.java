@@ -22,4 +22,8 @@ public class ItemImport {
 
     private int importQuantity;
     private LocalDateTime importDatetime;
+    private String importRemark; // ARRIVAL, RETURN
+
+    public ItemImport(Item item, int importQuantity) {
+    }
 }

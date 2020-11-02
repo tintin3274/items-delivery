@@ -17,7 +17,7 @@ public class OrderRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String status;
+    private String status; // PENDING, PROGRESSING, SUCCESS, CANCEL
 
     @NotBlank
     private String address;
