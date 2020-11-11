@@ -4,35 +4,56 @@ import org.springframework.web.bind.annotation.*;
 import th.ku.itemsdelivery.model.Customer;
 import th.ku.itemsdelivery.repository.CustomerRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/items-delivery/customer")
 public class CustomerRestController {
-    private CustomerRepository repository;
+    private CustomerRepository customerRepository;
 
-    public CustomerRestController(CustomerRepository repository) {
-        this.repository = repository;
+    public CustomerRestController(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     @GetMapping
     public List<Customer> getAll() {
-        return repository.findAll();
+        return customerRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Customer getOne(@PathVariable int id){
         try {
-            return repository.findById(id).get();
-        } catch (NoSuchElementException e) {
+            return customerRepository.findById(id).get();
+        } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
             return null;
         }
     }
 
     @PostMapping
     public Customer create(@RequestBody Customer customer) {
-        Customer record = repository.saveAndFlush(customer);
-        return record;
+        customerRepository.saveAndFlush(customer);
+        return customer;
+    }
+
+    @GetMapping("/firstname={firstname}/lastname={lastname}/phoneNumber={phoneNumber}")
+    public List<Customer> getFindCustomer(@PathVariable String firstname, @PathVariable String lastname, @PathVariable String phoneNumber){
+        try {
+            return customerRepository.findCustomersByFirstnameContainsAndLastnameContainsAndPhoneNumberContains(firstname, lastname, phoneNumber);
+        } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @GetMapping("/phoneNumber={phoneNumber}")
+    public Customer getFindIdByPhoneNumber(@PathVariable String phoneNumber){
+        try {
+            return customerRepository.findCustomersByPhoneNumber(phoneNumber);
+        } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 }

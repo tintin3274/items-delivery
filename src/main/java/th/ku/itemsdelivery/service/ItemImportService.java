@@ -15,15 +15,6 @@ public class ItemImportService {
     }
 
     public void addItem(int id, int amount) {
-        String urlItem = "http://localhost:8090/api/items-delivery/item/" + id;
-        ResponseEntity<Item> response = restTemplate.getForEntity(urlItem, Item.class);
-        Item item = response.getBody();
 
-        String urlItemImport = "http://localhost:8090/api/items-delivery/item_import";
-        ItemImport itemImport = new ItemImport(item, amount);
-        item.setQuantity(item.getQuantity() + amount);
-
-        restTemplate.postForObject(urlItemImport, itemImport, ItemImport.class);
-        restTemplate.put(urlItem, item);
     }
 }

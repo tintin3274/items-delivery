@@ -4,48 +4,50 @@ import org.springframework.web.bind.annotation.*;
 import th.ku.itemsdelivery.model.Item;
 import th.ku.itemsdelivery.repository.ItemRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/items-delivery/item")
 public class ItemRestController {
-    private ItemRepository repository;
+    private ItemRepository itemRepository;
 
-    public ItemRestController(ItemRepository repository) {
-        this.repository = repository;
+    public ItemRestController(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
     }
 
     @GetMapping
     public List<Item> getAll() {
-        return repository.findAll();
+        return itemRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Item getOne(@PathVariable int id){
         try {
-            return repository.findById(id).get();
-        } catch (NoSuchElementException e) {
+            return itemRepository.findById(id).get();
+        } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
             return null;
         }
     }
 
     @PostMapping
     public Item create(@RequestBody Item item) {
-        Item record = repository.saveAndFlush(item);
-        return record;
+        itemRepository.saveAndFlush(item);
+        return item;
     }
 
     @PutMapping("/{id}")
     public Item update(@PathVariable int id,
                        @RequestBody Item item) {
         try {
-            Item record = repository.findById(id).get();
+            Item record = itemRepository.findById(id).get();
             record.setQuantity(item.getQuantity());
             record.setRequired(item.getRequired());
-            repository.save(record);
+            itemRepository.save(record);
             return record;
-        } catch (NoSuchElementException e) {
+        } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
             return null;
         }
     }

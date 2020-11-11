@@ -17,6 +17,8 @@ public class OrderRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank
+    private String name;
     private String status; // PENDING, PROGRESSING, SUCCESS, CANCEL
 
     @NotBlank
@@ -27,7 +29,5 @@ public class OrderRequest {
     private LocalDateTime dueDatetime;
     private LocalDateTime deliveryDatetime;
 
-    @ManyToOne
-    @JoinColumn(name="customer_id", referencedColumnName="id")
-    private Customer customer;
+    private int customer_id;
 }

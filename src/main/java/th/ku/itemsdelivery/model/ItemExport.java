@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "item_export")
 public class ItemExport {
     @EmbeddedId
     private ItemExportId itemExportId;

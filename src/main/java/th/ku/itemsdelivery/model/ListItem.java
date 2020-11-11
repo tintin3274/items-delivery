@@ -10,7 +10,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "list_item")
 public class ListItem {
     @EmbeddedId
     private ListItemId listItemId;
