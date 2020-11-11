@@ -16,10 +16,9 @@ public class ItemImport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name="item_id", referencedColumnName="id")
-    private Item item;
+    private int item_id;
 
     private int importQuantity;
     private LocalDateTime importDatetime;
+    private String importRemark; // ARRIVAL, RETURN
 }
