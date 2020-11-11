@@ -8,7 +8,9 @@
     <div  id="fill">
         <select id='filterText' style='display:inline-block' onchange='filterText()'>
             <option disabled selected>Select Status</option>
-            <option value='pending'>Pending - Ready</option>
+            <option value='pending'>Pending</option>
+            <option value='"Pending ready"'>Pending - Ready</option>
+            <option value='pending not ready'>Pending -Not Ready</option>
             <option value='in progress'>In progress</option>
             <option value=''>All</option>
         </select>
@@ -19,6 +21,7 @@
 
         <thead>
         <tr>
+
             <th class="th-sm">ID
             </th>
             <th class="th-sm">Order Name
@@ -29,6 +32,9 @@
             </th>
             <th class="th-sm">Date-Out
             </th>
+            <th class="th-sm">Date-Out
+            </th>
+
 
         </tr>
         </thead>
@@ -36,18 +42,29 @@
         <tr>
             <td>Tiger Nixon</td>
             <td>System Architect</td>
-            <td>Pending</td>
+            <td>Pending <span class="badge badge-default">Ready</span></td>
             <td>61</td>
             <td>2011/04/25</td>
+            <td><button class="btn peach-gradient">Peach</button></td>
+
 
         </tr>
         <tr>
             <td>Garrett Winters</td>
             <td>Accountant</td>
-            <td>in progress</td>
+            <td>In progress</td>
             <td>63</td>
             <td>2011/07/25</td>
+            <td>2011/04/25</td>
 
+        </tr>
+        <tr>
+            <td>Airi Satou</td>
+            <td>Accountant</td>
+            <td>Pending <span class="badge badge-danger">Not Ready</span></td>
+            <td>33</td>
+            <td>2008/11/28</td>
+            <td>2011/04/25</td>
         </tr>
 
         </tbody>
@@ -62,6 +79,8 @@
             <th>Age
             </th>
             <th>Start date
+            </th>
+            <th class="th-sm">Date-Out
             </th>
 
         </tr>
@@ -83,31 +102,14 @@
     <script type="text/javascript" src="/mdb/js/addons/datatables.min.js"></script>
 
 <!--    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
-    <script>
-        function filterText()
-        {
-            var rex = new RegExp($('#filterText').val());
-            if(rex =="/all/"){clearFilter()}else{
-                $('.content').hide();
-                $('.content').filter(function() {
-                    return rex.test($(this).text());
-                }).show();
-            }
-        }
 
-        function clearFilter()
-        {
-            $('.filterText').val('');
-            $('.content').show();
-        }
-    </script>
     <script>
         $(document).ready(function () {
             $('#selectedColumn').DataTable({
                 "aaSorting": [],
                 columnDefs: [{
                     orderable: false,
-                    targets: 0
+                    targets: 5
                 }]
             });
             $('.dataTables_length').addClass('bs-select');
