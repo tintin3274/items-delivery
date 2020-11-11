@@ -1,0 +1,20 @@
+.btn-mystyle{
+    color:#007bff;border-color:#007bff
+}
+.btn-mystyle:hover{
+    color:#fff;background-color:#007bff;border-color:#007bff
+}
+.btn-round{
+    /*font-weight : bold;*/
+    /*font-size: 22px;*/
+    border-radius: 360px;
+}
+#filterText{
+    width: 20%;
+    margin-top: 40px;
+    margin-left: 500px;
+
+}
+#fill{
+    margin: auto;
+}
