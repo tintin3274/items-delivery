@@ -18,3 +18,39 @@
 #fill{
     margin: auto;
 }
+
+.moveall,
+.removeall {
+    border: 1px solid #ccc !important;
+}
+
+.moveall::after {
+    content: attr(title);
+
+}
+
+.removeall::after {
+    content: attr(title);
+}
+
+#cusForm1 {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    /*height:  250px;*/
+    line-height: 1px;
+}
+
+#btn-search1 {
+    margin-left: 50px;
+    padding: 5px 40px;
+    border-radius: 12px;
+}
+#btn-search2 {
+    margin-left: 50px;
+    padding: 5px 40px;
+    border-radius: 12px;
+}
+#cusForm2 {
+    margin-bottom: 50px;
+    line-height: 1px;
+}

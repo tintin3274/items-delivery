@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}"
+      xmlns:th="https://www.thymeleaf.org">
+
+
+<div layout:fragment="content" class="container">
+    <form class="border border-light p-5" id="cusForm1">
+        <!-- Grid row -->
+        <div class="form-row">
+            <!-- Default input -->
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">First name</label>
+                <input type="text" class="form-control" id="inputEmail4" >
+            </div>
+            <!-- Default input -->
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Last name</label>
+                <input type="text" class="form-control" id="inputPassword4" >
+            </div>
+        </div>
+        <!-- Grid row -->
+
+            <!-- Default input -->
+            <!-- Default input -->
+        <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Tel.</label>
+                    <input type="text" class="form-control" id="inputPassword41" >
+                </div>
+            <button class="btn purple-gradient" id="btn-search1">Search</button>
+        </div>
+        <!-- Grid row -->
+
+    </form>
+
+    <form class="border border-light p-5" id="cusForm2">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">ID</label>
+                <input type="text" class="form-control" id="inputEmail41" >
+            </div>
+            <button class="btn purple-gradient" id="btn-search2">Search</button>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead class="black white-text">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
