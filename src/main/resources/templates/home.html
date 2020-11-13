@@ -28,9 +28,9 @@
             </th>
             <th class="th-sm">Status
             </th>
-            <th class="th-sm">Date-In
+            <th class="th-sm">Create-Date
             </th>
-            <th class="th-sm">Date-Out
+            <th class="th-sm">Due-Date
             </th>
             <th class="th-sm">Action
             </th>
@@ -39,33 +39,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Tiger Nixon</td>
-            <td>System Architect</td>
-            <td>Pending <span class="badge badge-default">Ready</span></td>
-            <td>61</td>
-            <td>2011/04/25</td>
-            <td><button class="btn peach-gradient">Peach</button></td>
-
-
-        </tr>
-        <tr>
-            <td>Garrett Winters</td>
-            <td>Accountant</td>
-            <td>In progress</td>
-            <td>63</td>
-            <td>2011/07/25</td>
-            <td>2011/04/25</td>
-
-        </tr>
-        <tr>
-            <td>Airi Satou</td>
-            <td>Accountant</td>
-            <td>Pending <span class="badge badge-danger">Not Ready</span></td>
-            <td>33</td>
-            <td>2008/11/28</td>
-            <td>2011/04/25</td>
-        </tr>
+        <tr th:each="order : ${allOrders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.name}"></td>
+            <td th:text="${order.status}"></td>
+            <td th:text="${order.createDatetime}"></td>
+            <td th:text="${order.dueDatetime}"></td>
+            <td><button class="btn blue-gradient btn-home">Select</button>
+                <button class="btn purple-gradient btn-home">Info</button>
+                <button class="btn peach-gradient btn-home">cancel</button>
+            </td>
 
         </tbody>
         <tfoot>
@@ -76,9 +59,9 @@
             </th>
             <th>Status
             </th>
-            <th>Date-In
+            <th>Create-Date
             </th>
-            <th>Date-Out
+            <th>Due-Date
             </th>
             <th class="th-sm">Action
             </th>
