@@ -31,7 +31,7 @@ public class ListItemRestController {
     }
 
     @GetMapping("/order_id={order_id}&item_id={item_id}")
-    public ListItem getOne(@PathVariable int order_id, @PathVariable int item_id){
+    public ListItem getOne(@PathVariable int order_id, @PathVariable int item_id) {
         try {
             ListItemId listItemId = new ListItemId(order_id, item_id);
             return listItemRepository.findById(listItemId).get();

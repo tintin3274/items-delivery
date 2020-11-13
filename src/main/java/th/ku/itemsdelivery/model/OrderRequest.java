@@ -19,7 +19,7 @@ public class OrderRequest {
 
     @NotBlank
     private String name;
-    private String status; // PENDING, PROGRESSING, SUCCESS, CANCEL
+    private String status; // PENDING, PROGRESS, SUCCESS, CANCEL
 
     @NotBlank
     private String address;

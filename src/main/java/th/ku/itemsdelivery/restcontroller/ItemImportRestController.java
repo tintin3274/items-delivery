@@ -27,7 +27,7 @@ public class ItemImportRestController {
     }
 
     @GetMapping("/{id}")
-    public ItemImport getOne(@PathVariable int id){
+    public ItemImport getOne(@PathVariable int id) {
         try {
             return itemImportRepository.findById(id).get();
         } catch (EntityNotFoundException e) {

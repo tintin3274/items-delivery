@@ -22,7 +22,7 @@ public class CustomerRestController {
     }
 
     @GetMapping("/{id}")
-    public Customer getOne(@PathVariable int id){
+    public Customer getOne(@PathVariable int id) {
         try {
             return customerRepository.findById(id).get();
         } catch (EntityNotFoundException e) {
@@ -38,19 +38,9 @@ public class CustomerRestController {
     }
 
     @GetMapping("/firstname={firstname}/lastname={lastname}/phoneNumber={phoneNumber}")
-    public List<Customer> getFindCustomer(@PathVariable String firstname, @PathVariable String lastname, @PathVariable String phoneNumber){
+    public List<Customer> getFindCustomer(@PathVariable String firstname, @PathVariable String lastname, @PathVariable String phoneNumber) {
         try {
             return customerRepository.findCustomersByFirstnameContainsAndLastnameContainsAndPhoneNumberContains(firstname, lastname, phoneNumber);
-        } catch (EntityNotFoundException e) {
-            System.err.println(e.getMessage());
-            return null;
-        }
-    }
-
-    @GetMapping("/phoneNumber={phoneNumber}")
-    public Customer getFindIdByPhoneNumber(@PathVariable String phoneNumber){
-        try {
-            return customerRepository.findCustomersByPhoneNumber(phoneNumber);
         } catch (EntityNotFoundException e) {
             System.err.println(e.getMessage());
             return null;

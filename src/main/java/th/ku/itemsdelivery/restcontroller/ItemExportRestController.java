@@ -27,7 +27,7 @@ public class ItemExportRestController {
     }
 
     @GetMapping("/order_id={order_id}&item_id={item_id}")
-    public ItemExport getAll(@PathVariable int order_id, @PathVariable int item_id){
+    public ItemExport getAll(@PathVariable int order_id, @PathVariable int item_id) {
         try {
             ItemExportId itemExportId = new ItemExportId(order_id, item_id);
             return itemExportRepository.findById(itemExportId).get();
