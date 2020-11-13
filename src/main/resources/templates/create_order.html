@@ -5,7 +5,7 @@
 
 <div layout:fragment="content" class="container">
     <h1>Crate Order</h1>
-    <button class="btn aqua-gradient">regular customer</button>
+    <a th:href="@{/search_customer}" class="btn aqua-gradient" role="button" >regular customer</a>
     <h2>Customer Detail</h2>
 
     <form class="border border-light p-5">
@@ -58,7 +58,7 @@
         </div>
 
         <!-- Grid row -->
-        <button type="submit" class="btn btn-primary btn-md">Sign in</button>
+        <a th:href="@{/select_item}" class="btn btn-primary btn-md" role="button" >Next</a>
     </form>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
