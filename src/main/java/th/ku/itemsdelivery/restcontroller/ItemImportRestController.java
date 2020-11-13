@@ -36,26 +36,20 @@ public class ItemImportRestController {
         }
     }
 
-    @PostMapping
-    public ItemImport create(@RequestBody ItemImport itemImport) {
-        ItemImport record = itemImportRepository.saveAndFlush(itemImport);
-        return record;
-    }
-
     @GetMapping("/item={item_id}/add={quantity}")
     public ItemImport addQuantity(@PathVariable int item_id, @PathVariable int quantity) {
         try {
             if(quantity < 1) throw new IllegalArgumentException("Quantity should > 1");
-            Item item = itemRepository.getOne(item_id);
-            item.setQuantity(item.getQuantity() + quantity);
-            itemRepository.save(item);
-
             ItemImport itemImport = new ItemImport();
             itemImport.setItem_id(item_id);
             itemImport.setImportQuantity(quantity);
             itemImport.setImportRemark("ARRIVAL");
             itemImport.setImportDatetime(LocalDateTime.now());
             itemImportRepository.saveAndFlush(itemImport);
+
+            Item item = itemRepository.findById(item_id).get();
+            item.setQuantity(item.getQuantity() + quantity);
+            itemRepository.save(item);
             return itemImport;
         } catch (EntityNotFoundException e) {
             System.err.println(e.getMessage());

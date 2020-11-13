@@ -27,7 +27,7 @@ public class OrderRequest {
     private String description;
     private LocalDateTime createDatetime;
     private LocalDateTime dueDatetime;
-    private LocalDateTime deliveryDatetime;
+    private LocalDateTime lastUpdateDatetime;
 
     private int customer_id;
 }

@@ -1,8 +1,8 @@
 package th.ku.itemsdelivery.restcontroller;
 
 import org.springframework.web.bind.annotation.*;
-import th.ku.itemsdelivery.model.OrderRequest;
-import th.ku.itemsdelivery.repository.OrderRequestRepository;
+import th.ku.itemsdelivery.model.*;
+import th.ku.itemsdelivery.repository.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
@@ -12,9 +12,17 @@ import java.util.List;
 @RequestMapping("/api/items-delivery/order_request")
 public class OrderRequestRestController {
     private OrderRequestRepository orderRequestRepository;
+    private ItemRepository itemRepository;
+    private ListItemRepository listItemRepository;
+    private ItemImportRepository itemImportRepository;
+    private ItemExportRepository itemExportRepository;
 
-    public OrderRequestRestController(OrderRequestRepository orderRequestRepository) {
+    public OrderRequestRestController(OrderRequestRepository orderRequestRepository, ItemRepository itemRepository, ListItemRepository listItemRepository, ItemImportRepository itemImportRepository, ItemExportRepository itemExportRepository) {
         this.orderRequestRepository = orderRequestRepository;
+        this.itemRepository = itemRepository;
+        this.listItemRepository = listItemRepository;
+        this.itemImportRepository = itemImportRepository;
+        this.itemExportRepository = itemExportRepository;
     }
 
     @GetMapping
@@ -34,9 +42,85 @@ public class OrderRequestRestController {
 
     @PostMapping
     public OrderRequest create(@RequestBody OrderRequest orderRequest) {
+        LocalDateTime localDateTimeNow = LocalDateTime.now();
+        orderRequest.setId(0);
         orderRequest.setStatus("PENDING");
-        orderRequest.setCreateDatetime(LocalDateTime.now());
+        orderRequest.setCreateDatetime(localDateTimeNow);
+        orderRequest.setLastUpdateDatetime(localDateTimeNow);
         orderRequestRepository.saveAndFlush(orderRequest);
+        return orderRequest;
+    }
+
+    @GetMapping("/progress/{id}")
+    public OrderRequest progress(@PathVariable int id){
+        OrderRequest orderRequest = getOne(id);
+        if(orderRequest.getStatus().equals("PENDING")) {
+            LocalDateTime localDateTimeNow = LocalDateTime.now();
+            orderRequest.setStatus("PROGRESSING");
+            orderRequest.setLastUpdateDatetime(localDateTimeNow);
+            orderRequestRepository.save(orderRequest);
+            for(ListItem listItem : listItemRepository.findByListItemId_OrderId(id)) {
+                ListItemId listItemId = listItem.getListItemId();
+
+                ItemExportId itemExportId = new ItemExportId(listItemId.getOrderId(), listItemId.getItemId());
+                ItemExport itemExport = new ItemExport(itemExportId, listItem.getQuantity(), localDateTimeNow);
+                itemExportRepository.save(itemExport);
+
+                Item item = itemRepository.findById(listItemId.getItemId()).get();
+                item.setRequired(item.getRequired() - listItem.getQuantity());
+                item.setQuantity(item.getQuantity() - listItem.getQuantity());
+                itemRepository.save(item);
+            }
+        }
+        return orderRequest;
+    }
+
+    @GetMapping("/success/{id}")
+    public OrderRequest success(@PathVariable int id){
+        OrderRequest orderRequest = getOne(id);
+        if(orderRequest.getStatus().equals("PROGRESSING")) {
+            orderRequest.setStatus("SUCCESS");
+            orderRequest.setLastUpdateDatetime(LocalDateTime.now());
+            orderRequestRepository.save(orderRequest);
+        }
+        return orderRequest;
+    }
+
+    @GetMapping("/cancel/{id}")
+    public OrderRequest cancel(@PathVariable int id){
+        OrderRequest orderRequest = getOne(id);
+        LocalDateTime localDateTimeNow = LocalDateTime.now();
+        if(orderRequest.getStatus().equals("PROGRESSING")) {
+            orderRequest.setStatus("CANCEL");
+            orderRequest.setLastUpdateDatetime(localDateTimeNow);
+            orderRequestRepository.save(orderRequest);
+            for(ListItem listItem : listItemRepository.findByListItemId_OrderId(id)) {
+                ListItemId listItemId = listItem.getListItemId();
+
+                ItemImport itemImport = new ItemImport();
+                itemImport.setItem_id(listItemId.getItemId());
+                itemImport.setImportQuantity(listItem.getQuantity());
+                itemImport.setImportRemark("RETURN");
+                itemImport.setImportDatetime(localDateTimeNow);
+                itemImportRepository.saveAndFlush(itemImport);
+
+                Item item = itemRepository.findById(listItemId.getItemId()).get();
+                item.setQuantity(item.getQuantity() + listItem.getQuantity());
+                itemRepository.save(item);
+            }
+        }
+        else if(orderRequest.getStatus().equals("PENDING")) {
+            orderRequest.setStatus("CANCEL");
+            orderRequest.setLastUpdateDatetime(localDateTimeNow);
+            orderRequestRepository.save(orderRequest);
+            for(ListItem listItem : listItemRepository.findByListItemId_OrderId(id)) {
+                ListItemId listItemId = listItem.getListItemId();
+
+                Item item = itemRepository.findById(listItemId.getItemId()).get();
+                item.setRequired(item.getRequired() - listItem.getQuantity());
+                itemRepository.save(item);
+            }
+        }
         return orderRequest;
     }
 }
