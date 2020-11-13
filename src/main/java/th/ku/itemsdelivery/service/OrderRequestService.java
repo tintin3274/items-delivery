@@ -1,6 +1,5 @@
 package th.ku.itemsdelivery.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 import th.ku.itemsdelivery.model.OrderRequest;
 
 import java.util.*;
-import java.util.concurrent.Exchanger;
 
 @Service
 public class OrderRequestService {
@@ -31,6 +29,13 @@ public class OrderRequestService {
         ResponseEntity<OrderRequest> response = restTemplate.getForEntity(url, OrderRequest.class);
         OrderRequest orderRequest = response.getBody();
         return orderRequest;
+    }
+
+    public List<OrderRequest> getOrderRequestStatusAll(String status) {
+        String url = "http://localhost:8090/api/items-delivery/order_request/status="+status;
+        ResponseEntity<OrderRequest[]> response = restTemplate.getForEntity(url, OrderRequest[].class);
+        OrderRequest[] orderRequests = response.getBody();
+        return Arrays.asList(orderRequests);
     }
 
     public OrderRequest createOrderRequest(OrderRequest orderRequest) {
