@@ -24,13 +24,7 @@ public class HomeController {
 
     @GetMapping
     public String getHomePage(Model model){
-        List<OrderRequest> currentOrderslist = new ArrayList<OrderRequest>();
-        for(OrderRequest order : orderRequestService.getOrderRequestAll()) {
-            if (order.getStatus().equals("PENDING") || order.getStatus().equals("PROGRESS")){
-                currentOrderslist.add(order);
-            }
-        }
-        model.addAttribute("allOrders",currentOrderslist);
+        model.addAttribute("allOrders",orderRequestService.getOrderRequestStatusAll("PENDING").addAll(orderRequestService.getOrderRequestStatusAll("PROGESS")));
         return "home";
     }
 
