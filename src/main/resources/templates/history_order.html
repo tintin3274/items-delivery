@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="order : ${allHistoryOrders}>
+        <tr th:each="historyOrder : ${allHistoryOrders}">
             <td th:text="${historyOrder.id}"></td>
             <td th:text="${historyOrder.name}"></td>
             <td th:text="${historyOrder.status}"></td>

@@ -24,7 +24,10 @@ public class HomeController {
 
     @GetMapping
     public String getHomePage(Model model){
-        model.addAttribute("allOrders",orderRequestService.getOrderRequestStatusAll("PENDING").addAll(orderRequestService.getOrderRequestStatusAll("PROGESS")));
+        ArrayList<OrderRequest> currentOrderslist=new ArrayList<>();
+        currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PENDING"));
+        currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
+        model.addAttribute("allOrders",currentOrderslist);
         return "home";
     }
 
