@@ -22,7 +22,7 @@ public class ItemRestController {
     }
 
     @GetMapping("/{id}")
-    public Item getOne(@PathVariable int id){
+    public Item getOne(@PathVariable int id) {
         try {
             return itemRepository.findById(id).get();
         } catch (EntityNotFoundException e) {
