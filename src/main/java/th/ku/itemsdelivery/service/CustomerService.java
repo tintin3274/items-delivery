@@ -42,4 +42,17 @@ public class CustomerService {
         Customer[] customers = responseEntity.getBody();
         return Arrays.asList(customers);
     }
+
+    public Customer getFindCustomerEqual(String firstname, String lastname, String phoneNumber) {
+        String url = "http://localhost:8090/api/items-delivery/customer/equal/firstname="+firstname+"/lastname="+lastname+"/phoneNumber="+phoneNumber;
+        ResponseEntity<Customer> responseEntity = restTemplate.getForEntity(url, Customer.class);
+        Customer customer = responseEntity.getBody();
+        return customer;
+    }
+
+    public Customer updateCustomer(int id, Customer customer) {
+        String url = "http://localhost:8090/api/items-delivery/customer/"+id;
+        restTemplate.put(url, customer);
+        return getCustomer(id);
+    }
 }
