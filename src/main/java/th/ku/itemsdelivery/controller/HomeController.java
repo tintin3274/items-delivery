@@ -12,6 +12,7 @@ import th.ku.itemsdelivery.service.OrderRequestService;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -27,8 +28,16 @@ public class HomeController {
     public String getHomePage(Model model){
         ArrayList<OrderRequest> currentOrderslist=new ArrayList<>();
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
+        List<OrderRequest> pendingOrderList = orderRequestService.getOrderRequestStatusAll("PENDING");
+        HashMap<Integer, Boolean> checkOrder = orderRequestService.pendingCheckOrderRequestItemAll();
+        for(OrderRequest orderRequest : pendingOrderList){
+            if(checkOrder.get(orderRequest.getId()))
+                orderRequest.setStatus("PENDING - READY");
+            else
+                orderRequest.setStatus("PENDING - NOT READY");
+        }
 
-        currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PENDING"));
+        currentOrderslist.addAll(pendingOrderList);
         currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
         model.addAttribute("allOrders",currentOrderslist);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
