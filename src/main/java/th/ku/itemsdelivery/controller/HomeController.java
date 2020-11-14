@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
@@ -25,9 +26,12 @@ public class HomeController {
     @GetMapping
     public String getHomePage(Model model){
         ArrayList<OrderRequest> currentOrderslist=new ArrayList<>();
+        DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
+
         currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PENDING"));
         currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
         model.addAttribute("allOrders",currentOrderslist);
+        model.addAttribute("dateTimeAdapter",dateTimeAdapter);
         return "home";
     }
 

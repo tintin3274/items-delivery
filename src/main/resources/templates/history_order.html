@@ -29,9 +29,9 @@
             <td th:text="${historyOrder.id}"></td>
             <td th:text="${historyOrder.name}"></td>
             <td th:text="${historyOrder.status}"></td>
-            <td th:text="${historyOrder.createDatetime}"></td>
-            <td th:text="${historyOrder.dueDatetime}"></td>
-            <td th:text="${historyOrder.lastUpdateDatetime}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.createDatetime)}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.dueDatetime)}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.lastUpdateDatetime)}"></td>
         </tr>
         </tbody>
         <tfoot>
