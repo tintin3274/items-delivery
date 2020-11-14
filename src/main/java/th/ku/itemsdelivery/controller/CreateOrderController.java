@@ -27,16 +27,14 @@ public class CreateOrderController {
     public String getCreatePage(){return "create_order";}
 
     @PostMapping
-    public String createOrder(@ModelAttribute OrderRequest orderRequest, @ModelAttribute Customer customer) {
-        for(Customer customerCheck : customerService.getCustomerAll()){
-            if(customerCheck.getFirstname().equals(customer.getFirstname())
-            || customerCheck.getLastname().equals(customer.getLastname())
-            || customerCheck.getPhoneNumber().equals(customer.getPhoneNumber()))
-                return "redirect:/create_order";
-        }
+    public String createOrder(@ModelAttribute Customer customer) {
+//       if(customerService.getFindCustomerEqual(customer.getFirstname(), customer.getLastname(), customer.getPhoneNumber()) != null)
+//           return "redirect:/create_order";
+        System.err.println(customer.toString());
+        System.err.println("WHY");
+       customerService.createCustomer(customer);
 
-        customerService.createCustomer(customer);
-        orderRequestService.createOrderRequest(orderRequest);
-        return "redirect:/create_order";
+       //orderRequestService.createOrderRequest(orderRequest);
+       return "home";
     }
 }
