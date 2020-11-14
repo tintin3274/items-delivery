@@ -31,5 +31,5 @@ public class OrderRequest {
     private LocalDateTime dueDatetime;
     private LocalDateTime lastUpdateDatetime;
 
-    private int customer_id;
+    private int customerId;
 }

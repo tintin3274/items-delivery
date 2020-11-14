@@ -6,7 +6,6 @@ import th.ku.itemsdelivery.repository.CustomerRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/items-delivery/customer")
