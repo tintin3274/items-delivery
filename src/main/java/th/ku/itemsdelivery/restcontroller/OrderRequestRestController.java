@@ -106,7 +106,7 @@ public class OrderRequestRestController {
                 ListItemId listItemId = listItem.getListItemId();
 
                 ItemImport itemImport = new ItemImport();
-                itemImport.setItem_id(listItemId.getItemId());
+                itemImport.setItemId(listItemId.getItemId());
                 itemImport.setImportQuantity(listItem.getQuantity());
                 itemImport.setImportRemark("RETURN");
                 itemImport.setImportDatetime(localDateTimeNow);

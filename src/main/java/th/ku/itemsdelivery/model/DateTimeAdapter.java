@@ -7,6 +7,10 @@ public class DateTimeAdapter {
     }
 
     public String changeFormatDateTime(LocalDateTime localDateTime) {
-        return localDateTime.toString().replace("T", " ");
+        try {
+            return localDateTime.toString().replace("T", " ");
+        } catch (NullPointerException e) {
+            return "NULL";
+        }
     }
 }
