@@ -30,10 +30,10 @@ public class ListItemRestController {
         return listItemRepository.findAll();
     }
 
-    @GetMapping("/order_id={order_id}&item_id={item_id}")
-    public ListItem getOne(@PathVariable int order_id, @PathVariable int item_id) {
+    @GetMapping("/order_id={orderId}&item_id={itemId}")
+    public ListItem getOne(@PathVariable int orderId, @PathVariable int itemId) {
         try {
-            ListItemId listItemId = new ListItemId(order_id, item_id);
+            ListItemId listItemId = new ListItemId(orderId, itemId);
             return listItemRepository.findById(listItemId).get();
         } catch (EntityNotFoundException e) {
             System.err.println(e.getMessage());
