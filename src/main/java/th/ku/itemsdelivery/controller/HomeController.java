@@ -6,15 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("/home")
@@ -27,10 +25,13 @@ public class HomeController {
 
     @GetMapping
     public String getHomePage(Model model){
-        List<OrderRequest> currentOrderlist = new ArrayList<>();
-        currentOrderlist.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
-        currentOrderlist.addAll(orderRequestService.getOrderRequestStatusAll("PENDING"));
-        model.addAttribute("allOrders",currentOrderlist);
+        ArrayList<OrderRequest> currentOrderslist=new ArrayList<>();
+        DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
+
+        currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PENDING"));
+        currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
+        model.addAttribute("allOrders",currentOrderslist);
+        model.addAttribute("dateTimeAdapter",dateTimeAdapter);
         return "home";
     }
 

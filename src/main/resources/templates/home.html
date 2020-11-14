@@ -5,12 +5,13 @@
 
 
 <div layout:fragment="content" class="container">
+    <h1 align="center">Order List</h1>
     <div  id="fill">
         <select id='filterText' style='display:inline-block' onchange='filterText()'>
             <option disabled selected>Select Status</option>
             <option value='pending'>Pending</option>
             <option value='"Pending ready"'>Pending - Ready</option>
-            <option value='pending not ready'>Pending - Not Ready</option>
+            <option value='pending not ready'>Pending -  Not Ready</option>
             <option value='progress'>Progress</option>
             <option value=''>All</option>
         </select>
@@ -43,8 +44,8 @@
             <td th:text="${order.id}"></td>
             <td th:text="${order.name}"></td>
             <td th:text="${order.status}"></td>
-            <td th:text="${order.createDatetime}"></td>
-            <td th:text="${order.dueDatetime}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
             <td><button class="btn blue-gradient btn-home">Select</button>
                 <button class="btn purple-gradient btn-home">Info</button>
                 <button class="btn peach-gradient btn-home">cancel</button>
