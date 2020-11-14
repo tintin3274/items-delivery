@@ -11,7 +11,10 @@ import th.ku.itemsdelivery.service.OrderRequestService;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("/home")
@@ -24,7 +27,10 @@ public class HomeController {
 
     @GetMapping
     public String getHomePage(Model model){
-        model.addAttribute("allOrders",orderRequestService.getOrderRequestStatusAll("PENDING").addAll(orderRequestService.getOrderRequestStatusAll("PROGESS")));
+        List<OrderRequest> currentOrderlist = new ArrayList<>();
+        currentOrderlist.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
+        currentOrderlist.addAll(orderRequestService.getOrderRequestStatusAll("PENDING"));
+        model.addAttribute("allOrders",currentOrderlist);
         return "home";
     }
 
