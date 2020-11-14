@@ -15,6 +15,7 @@
 
 
 <div layout:fragment="content" class="container">
+    <form action="#" th:action="@{/select_item}" method="POST" >
     <div class="container">
         <div class="row" style="margin-top: 40px;">
             <div class="col">
@@ -54,7 +55,7 @@
             </div>
         </div>
     </div>
-
+    </form>
     <script>
         var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox({
             nonSelectedListLabel: 'Available Payees',
@@ -63,10 +64,10 @@
             moveAllLabel: 'Move all',
             removeAllLabel: 'Remove all'
         });
-        $("#demoform").submit(function() {
-            alert($('[name="duallistbox_demo1[]"]').val());
-            return false;
-        });
+        // $("#demoform").submit(function() {
+        //     alert($('[name="duallistbox_demo1[]"]').val());
+        //     return false;
+        // });
     </script>
 
 
