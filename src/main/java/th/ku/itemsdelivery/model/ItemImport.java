@@ -18,7 +18,7 @@ public class ItemImport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int item_id;
+    private int itemId;
 
     private int importQuantity;
     private LocalDateTime importDatetime;

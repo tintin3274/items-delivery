@@ -33,22 +33,9 @@ public class ItemRestController {
 
     @PostMapping
     public Item create(@RequestBody Item item) {
+        item.setQuantity(0);
+        item.setRequired(0);
         itemRepository.saveAndFlush(item);
         return item;
-    }
-
-    @PutMapping("/{id}")
-    public Item update(@PathVariable int id,
-                       @RequestBody Item item) {
-        try {
-            Item record = itemRepository.findById(id).get();
-            record.setQuantity(item.getQuantity());
-            record.setRequired(item.getRequired());
-            itemRepository.save(record);
-            return record;
-        } catch (EntityNotFoundException e) {
-            System.err.println(e.getMessage());
-            return null;
-        }
     }
 }

@@ -46,4 +46,18 @@ public class CustomerRestController {
             return null;
         }
     }
+
+    @GetMapping("/equal/firstname={firstname}/lastname={lastname}/phoneNumber={phoneNumber}")
+    public Customer getFindCustomerEqual(@PathVariable String firstname, @PathVariable String lastname, @PathVariable String phoneNumber) {
+        List<Customer> customers = customerRepository.findCustomersByFirstnameEqualsAndLastnameEqualsAndPhoneNumberEquals(firstname, lastname, phoneNumber);
+        if(customers.isEmpty()) return null;
+        return customers.get(0);
+    }
+
+    @PutMapping("/{id}")
+    public Customer update(@PathVariable int id, @RequestBody Customer customer) {
+        customer.setId(getOne(id).getId());
+        customerRepository.save(customer);
+        return customer;
+    }
 }

@@ -26,10 +26,10 @@ public class ItemExportRestController {
         return itemExportRepository.findAll();
     }
 
-    @GetMapping("/order_id={order_id}&item_id={item_id}")
-    public ItemExport getAll(@PathVariable int order_id, @PathVariable int item_id) {
+    @GetMapping("/order_id={orderId}&item_id={itemId}")
+    public ItemExport getAll(@PathVariable int orderId, @PathVariable int itemId) {
         try {
-            ItemExportId itemExportId = new ItemExportId(order_id, item_id);
+            ItemExportId itemExportId = new ItemExportId(orderId, itemId);
             return itemExportRepository.findById(itemExportId).get();
         } catch (EntityNotFoundException e) {
             System.err.println(e.getMessage());

@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/items-delivery/order_request")
@@ -40,6 +39,11 @@ public class OrderRequestRestController {
             System.err.println(e.getMessage());
             return null;
         }
+    }
+
+    @GetMapping("/status={status}")
+    public List<OrderRequest> getStatusAll(@PathVariable String status) {
+        return orderRequestRepository.findByStatusEquals(status);
     }
 
     @PostMapping
@@ -102,7 +106,7 @@ public class OrderRequestRestController {
                 ListItemId listItemId = listItem.getListItemId();
 
                 ItemImport itemImport = new ItemImport();
-                itemImport.setItem_id(listItemId.getItemId());
+                itemImport.setItemId(listItemId.getItemId());
                 itemImport.setImportQuantity(listItem.getQuantity());
                 itemImport.setImportRemark("RETURN");
                 itemImport.setImportDatetime(localDateTimeNow);
@@ -146,7 +150,7 @@ public class OrderRequestRestController {
     @GetMapping("/pending-available")
     public HashMap<Integer, Boolean> pendingCheckOrderRequestItemAll() {
         HashMap<Integer, Boolean> allPendingStatusAvailable = new HashMap<>();
-        for(OrderRequest orderRequest : orderRequestRepository.findByStatusEquals("PENDING")) {
+        for(OrderRequest orderRequest : getStatusAll("PENDING")) {
             allPendingStatusAvailable.put(orderRequest.getId(), pendingCheckOrderRequestItem(orderRequest.getId()));
         }
         return allPendingStatusAvailable;
