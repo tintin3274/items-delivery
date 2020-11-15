@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.service.ItemService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,13 +17,17 @@ import java.util.List;
 @RequestMapping("/select_item")
 public class SelectItemController {
     private OrderRequestService orderRequestService;
+    private ItemService itemService;
 
-    public SelectItemController(OrderRequestService orderRequestService) {
+    public SelectItemController(OrderRequestService orderRequestService,ItemService itemService) {
         this.orderRequestService = orderRequestService;
+        this.itemService=itemService;
     }
 
     @GetMapping
-    public String getSelectPage(){return "select_item";}
+    public String getSelectPage(Model model){
+        model.addAttribute("allItems",itemService.getItemAll());
+        return "select_item";}
 
     @PostMapping
     public String select(HttpServletRequest request, Model model){

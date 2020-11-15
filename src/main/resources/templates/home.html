@@ -10,8 +10,8 @@
         <select id='filterText' style='display:inline-block' onchange='filterText()'>
             <option disabled selected>Select Status</option>
             <option value='pending'>Pending</option>
-            <option value='"Pending ready"'>Pending - Ready</option>
-            <option value='pending not ready'>Pending -  Not Ready</option>
+            <option value='"PENDING - READY"'>Pending - Ready</option>
+            <option value='PENDING - NOT READY'>Pending -  Not Ready</option>
             <option value='progress'>Progress</option>
             <option value=''>All</option>
         </select>
@@ -43,11 +43,11 @@
         <tr th:each="order : ${allOrders}">
             <td th:text="${order.id}"></td>
             <td th:text="${order.name}"></td>
-            <td th:text="${order.status}"></td>
+            <td th:text="${order.status}" id="stat"> </td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
-            <td><button class="btn blue-gradient btn-home">Select</button>
-                <button class="btn purple-gradient btn-home">Info</button>
+            <td><button class="btn blue-gradient btn-home " >Select</button>
+                <a class="btn purple-gradient btn-home" role="button" th:href="@{/home/info/{id}(id=${order.id})}" >Info</a>
                 <button class="btn peach-gradient btn-home">cancel</button>
             </td>
 
@@ -70,6 +70,7 @@
         </tr>
         </tfoot>
     </table>
+
 <!-- End your project here-->
 
 
@@ -82,7 +83,23 @@
                 columnDefs: [{
                     orderable: false,
                     targets: 5
-                }]
+                }],
+                rowCallback: function(row, data, index){
+                    var ch
+                    if(data[2] == 'PENDING - NOT READY'){
+                        $(row).find('td:eq(2)').css('color', 'red');
+                        $(row).find('button:eq(0)').css('pointer-events', 'none');
+                        $(row).find('button:eq(0)').css('opacity', '0.4');
+                    }
+                    else if(data[2] == 'PENDING - READY'){
+                        $(row).find('td:eq(2)').css('color', 'green');
+                    }
+                    else if(data[2] == 'PROGRESS'){
+                        $(row).find('td:eq(2)').css('color', 'blue');
+                    }
+
+                }
+
             });
             $('.dataTables_length').addClass('bs-select');
         });
@@ -93,6 +110,7 @@
             table.columns(2).search(this.value).draw();
         });
     </script>
+
 
 
 </div>

@@ -68,4 +68,9 @@ public class ListItemRestController {
             return null;
         }
     }
+
+    @GetMapping("/order_id={orderId}")
+    public List<ListItem> getListItemOrder(@PathVariable int orderId) {
+        return listItemRepository.findByListItemId_OrderId(orderId);
+    }
 }

@@ -105,4 +105,11 @@ public class ItemService {
         ListItem listItemResponse = responseEntity.getBody();
         return listItemResponse;
     }
+
+    public List<ListItem> getListItemOrder(int orderId) {
+        String url = "http://localhost:8090/api/items-delivery/list_item/order_id="+orderId;
+        ResponseEntity<ListItem[]> responseEntity = restTemplate.getForEntity(url, ListItem[].class);
+        ListItem[] listItems = responseEntity.getBody();
+        return Arrays.asList(listItems);
+    }
 }
