@@ -13,6 +13,7 @@ import th.ku.itemsdelivery.service.OrderRequestService;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/create_order")
@@ -40,7 +41,7 @@ public class CreateOrderController {
             customer = customerService.createCustomer(customer);
         }
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a", Locale.US);
         System.err.println(dueDateTime);
         LocalDateTime localDateTime = LocalDateTime.parse(dueDateTime, dateTimeFormatter);
         OrderRequest orderRequest = new OrderRequest(0, name.trim(), null, address.trim(), description,
