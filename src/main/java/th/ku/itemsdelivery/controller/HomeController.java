@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.service.CustomerService;
 import th.ku.itemsdelivery.service.ItemService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
@@ -18,10 +19,12 @@ import java.util.List;
 public class HomeController {
     private OrderRequestService orderRequestService;
     private ItemService itemService;
+    private CustomerService customerService;
 
-    public HomeController(OrderRequestService orderRequestService,ItemService itemService){
-        this.itemService=itemService;
+    public HomeController(OrderRequestService orderRequestService, ItemService itemService, CustomerService customerService) {
         this.orderRequestService = orderRequestService;
+        this.itemService = itemService;
+        this.customerService = customerService;
     }
 
     @GetMapping
@@ -51,6 +54,7 @@ public class HomeController {
         model.addAttribute("allItem",itemService.getListItemOrder(id));
         model.addAttribute("itemService",itemService);
         model.addAttribute("dateTimeAdapter",new DateTimeAdapter());
+        model.addAttribute("customerService",customerService);
         return "info_order";
     }
 

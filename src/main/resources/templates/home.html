@@ -43,7 +43,7 @@
         <tr th:each="order : ${allOrders}">
             <td th:text="${order.id}"></td>
             <td th:text="${order.name}"></td>
-            <td th:text="${order.status}"> </td>
+            <td th:text="${order.status}" id="stat"> </td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
             <td><button class="btn blue-gradient btn-home " >Select</button>
