@@ -6,6 +6,7 @@
 <div layout:fragment="content" class="container">
     <h1>Create Order</h1>
     <a th:href="@{/search_customer}" class="btn aqua-gradient" role="button" >regular customer</a>
+
     <h2>Customer Detail</h2>
 
     <form class="border border-light p-5" action="#" th:action="@{/create_order}" method="POST">
@@ -63,6 +64,8 @@
             <input type="submit" class="btn btn-primary" value="submit" onclick="submitForms()">
         </div>
     </form>
+
+
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

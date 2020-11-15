@@ -73,4 +73,20 @@ public class HomeController {
 //        model.addAttribute("order", orderRequest);
 //        return "redirect:home";
 //    }
+    @GetMapping("/cancel/{id}")
+    public String cancelOrder(@PathVariable int id){
+        orderRequestService.cancelOrderRequest(id);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/commit/{id}")
+    public String commitOrder(@PathVariable int id){
+        switch (orderRequestService.getOrderRequest(id).getStatus()){
+            case "PENDING": orderRequestService.progressOrderRequest(id); break;
+            case "PROGRESS": orderRequestService.successOrderRequest(id); break;
+            default:
+        }
+
+        return "redirect:/home";
+    }
 }

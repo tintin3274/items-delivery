@@ -9,7 +9,7 @@
     /*font-size: 22px;*/
     border-radius: 360px;
 }
-#filterText{
+.filterText{
     width: 20%;
     margin-top: 40px;
     margin-left: 500px;
@@ -62,7 +62,7 @@
     border-radius: 0.2rem;
 }
 
-#stat {
+.bold {
     font-weight: 700;
 }
 
@@ -80,6 +80,9 @@
     width: 100%;
     /*overflow-x: scroll;*/
 }
+
+.data-btn-confirm
+
 
 
 .number-input input[type="number"] {

@@ -3,11 +3,10 @@
       layout:decorate="~{fragments/main_layout}"
       xmlns:th="https://www.thymeleaf.org">
 
-
 <div layout:fragment="content" class="container">
     <h1 align="center">Order List</h1>
     <div  id="fill">
-        <select id='filterText' style='display:inline-block' onchange='filterText()'>
+        <select id='filterText' class="filterText" style='display:inline-block' onchange='filterText()'>
             <option disabled selected>Select Status</option>
             <option value='pending'>Pending</option>
             <option value='"PENDING - READY"'>Pending - Ready</option>
@@ -43,14 +42,17 @@
         <tr th:each="order : ${allOrders}">
             <td th:text="${order.id}"></td>
             <td th:text="${order.name}"></td>
-            <td th:text="${order.status}" id="stat"> </td>
+            <td th:text="${order.status}" class="bold"> </td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
-            <td><button class="btn blue-gradient btn-home " >Select</button>
+            <td><a class="btn blue-gradient btn-home" role="button" th:href="@{/home/commit/{id}(id=${order.id})}"
+                   data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
+            >Commit</a>
                 <a class="btn purple-gradient btn-home" role="button" th:href="@{/home/info/{id}(id=${order.id})}" >Info</a>
-                <button class="btn peach-gradient btn-home">cancel</button>
+                <a class="btn peach-gradient btn-home" role="button" th:href="@{/home/cancel/{id}(id=${order.id})}"
+                   data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
+                >cancel</a>
             </td>
-
         </tbody>
         <tfoot>
         <tr>
@@ -110,6 +112,7 @@
             table.columns(2).search(this.value).draw();
         });
     </script>
+        <script src="/bootstrap.confirm.js"></script>
 
 
 

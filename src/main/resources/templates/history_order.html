@@ -28,7 +28,7 @@
         <tr th:each="historyOrder : ${allHistoryOrders}">
             <td th:text="${historyOrder.id}"></td>
             <td th:text="${historyOrder.name}"></td>
-            <td th:text="${historyOrder.status}"></td>
+            <td th:text="${historyOrder.status}" class="bold"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.createDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.dueDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.lastUpdateDatetime)}"></td>
@@ -54,7 +54,18 @@
 
     <script>
         $(document).ready(function () {
-            $('#dtBasicExample').DataTable();
+            $('#dtBasicExample').DataTable({
+                rowCallback: function(row, data, index) {
+                    var ch
+                    if (data[2] == 'CANCEL') {
+                        $(row).find('td:eq(2)').css('color', 'red');
+                        $(row).find('button:eq(0)').css('pointer-events', 'none');
+                        $(row).find('button:eq(0)').css('opacity', '0.4');
+                    } else if (data[2] == 'SUCCESS') {
+                        $(row).find('td:eq(2)').css('color', 'green');
+                    }
+                }
+            });
             $('.dataTables_length').addClass('bs-select');
         });
     </script>

@@ -59,7 +59,7 @@ public class OrderRequestService {
     }
 
     public OrderRequest cancelOrderRequest(int id) {
-        String url = "http://localhost:8090/api/items-delivery/order_request/canel/"+id;
+        String url = "http://localhost:8090/api/items-delivery/order_request/cancel/"+id;
         ResponseEntity<OrderRequest> responseEntity = restTemplate.getForEntity(url, OrderRequest.class);
         OrderRequest orderRequest = responseEntity.getBody();
         return orderRequest;
