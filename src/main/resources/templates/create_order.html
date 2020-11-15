@@ -3,27 +3,24 @@
       layout:decorate="~{fragments/main_layout}"
       xmlns:th="https://www.thymeleaf.org">
 
-
-
-
 <div layout:fragment="content" class="container">
-    <form action="#" th:action="@{/create_order}" method="POST">
     <h1>Create Order</h1>
     <a th:href="@{/search_customer}" class="btn aqua-gradient" role="button" >regular customer</a>
     <h2>Customer Detail</h2>
 
-    <form class="border border-light p-5">
+    <form class="border border-light p-5" action="#" th:action="@{/create_order}" method="POST">
+
         <!-- Grid row -->
         <div class="form-row">
             <!-- Default input -->
             <div class="form-group col-md-6">
                 <label for="inputFirstName">First name</label>
-                <input type="text" class="form-control" id="inputFirstName" name="firstname" >
+                <input type="text" class="form-control" id="inputFirstName" name="firstname" path="customer">
             </div>
             <!-- Default input -->
             <div class="form-group col-md-6">
                 <label for="inputLastName">Last name</label>
-                <input type="text" class="form-control" id="inputLastName" name="lastname" >
+                <input type="text" class="form-control" id="inputLastName" name="lastname" path="customer">
             </div>
         </div>
         <!-- Grid row -->
@@ -32,42 +29,39 @@
         <!-- Default input -->
         <div class="form-group">
             <label for="inputPhone">Phone Number</label>
-            <input type="tel" class="form-control" id="inputPhone" name="phoneNumber" placeholder="10-20 digit " pattern="[0-9]{10-20}" required>
+            <input type="tel" class="form-control" id="inputPhone" name="phoneNumber" path="customer" placeholder="10-20 digit " pattern="[0-9]{10-20}" required>
         </div>
         <!-- Grid row -->
 
-<!--        <div class="form-group">-->
-<!--            <input type="submit" class="btn btn-primary">-->
-<!--        </div>-->
-    </form>
-    </form>
     <!-- Extended default form grid -->
     <h2>Order Detail</h2>
 
-    <form class="border border-light p-5">
         <!-- Default input -->
         <div class="form-group">
             <label for="inputNameO">Name</label>
-            <input type="text" class="form-control" id="inputNameO" >
+            <input type="text" class="form-control" id="inputNameO" name="name" path="order">
         </div>
         <!-- Grid row -->
         <div class="form-group">
             <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            <input type="text" class="form-control" id="inputAddress" name="address" path="order" placeholder="1234 Main St">
         </div>
         <div class="form-group">
             <label for="inputDateTimes">Due Date and Time</label>
-            <div> <input type="text" name="datetimes" id="inputDateTimes"/></div>
+            <div> <input type="text" name="dueDateTime" id="inputDateTimes"/></div>
         </div>
         <!-- Default input -->
         <div class="form-group">
             <label for="inputDes">Description</label>
-            <textarea class="form-control rounded-0" id="inputDes" rows="10"></textarea>
+            <textarea class="form-control rounded-0" id="inputDes" name="description" path="order" rows="10"></textarea>
         </div>
 
         <!-- Grid row -->
-        <a th:href="@{/select_item}" class="btn btn-primary btn-md" role="button" >Next</a>
+<!--        <a th:href="@{/select_item}" class="btn btn-primary btn-md" role="button" >Next</a>-->
 
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="submit" onclick="submitForms()">
+        </div>
     </form>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -77,7 +71,7 @@
 
     <script>
         $(function() {
-            $('input[name="datetimes"]').daterangepicker({
+            $('input[name="dueDateTime"]').daterangepicker({
                 timePicker: true,
                 singleDatePicker: true,
                 locale: {
@@ -86,8 +80,6 @@
             });
         });
     </script>
-
-
 
 
 </div>
