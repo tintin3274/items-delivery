@@ -15,6 +15,7 @@
 
 
 <div layout:fragment="content" class="container">
+    <form action="#" th:action="@{/select_item}" method="POST" >
     <div class="container">
         <div class="row" style="margin-top: 40px;">
             <div class="col">
@@ -27,21 +28,8 @@
         <div class="row" style="margin-bottom: 40px;">
             <div class="col">
                 <form id="demoform">
-                    <select multiple="multiple" size="10" name="duallistbox_demo1[]" title="duallistbox_demo1[]">
-                        <option value="payee1">Aviva Insurance - Business - 987654</option>
-                        <option value="payee2">Bell Mobility - 66853 (John Smith)</option>
-                        <option value="payee3">Bell Mobility - 75432 (Jane Smith)</option>
-                        <option value="payee4">Bell Mobility - 98765 (Jim Smith)</option>
-                        <option value="payee5">Canadian Tire Commercial Mastercard - **** 5525</option>
-                        <option value="payee6">Canadian Tire Mastercard - **** 3158 (President's Card)</option>
-                        <option value="payee7">FedEx Express Canada - 54321</option>
-                        <option value="payee8">Lowes Canada - 12345</option>
-                        <option value="payee9">Mastercard, PC Financial - **** 5535</option>
-                        <option value="payee10">Qtrade Investor - 12345</option>
-                        <option value="payee11" selected="selected">Servus Mastercard - **** 5545</option>
-                        <option value="payee12">Telus - 123456787 (Calagary  Office)</option>
-                        <option value="payee13">Telus - 123456788 (Edmonton NW Office)</option>
-                        <option value="payee14">Telus - 123456789 (Edmonton SE Office)</option>
+                    <select  multiple="multiple" size="10" name="duallistbox_demo1[]" title="duallistbox_demo1[]">
+                        <option th:each="item : ${allItems}" th:value="${item.id}" th:text ="${item.name}"></option>
                     </select>
                     <br>
                     <div class="row">
@@ -50,11 +38,10 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
-
+    </form>
     <script>
         var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox({
             nonSelectedListLabel: 'Available Payees',
@@ -63,10 +50,10 @@
             moveAllLabel: 'Move all',
             removeAllLabel: 'Remove all'
         });
-        $("#demoform").submit(function() {
-            alert($('[name="duallistbox_demo1[]"]').val());
-            return false;
-        });
+        // $("#demoform").submit(function() {
+        //     alert($('[name="duallistbox_demo1[]"]').val());
+        //     return false;
+        // });
     </script>
 
 
