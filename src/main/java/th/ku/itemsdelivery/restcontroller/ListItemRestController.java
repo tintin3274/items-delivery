@@ -66,6 +66,9 @@ public class ListItemRestController {
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return null;
+        } catch (NoSuchElementException e) {
+            System.err.println(e.getMessage());
+            return null;
         }
     }
 

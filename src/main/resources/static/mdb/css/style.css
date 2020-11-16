@@ -34,19 +34,14 @@
 }
 
 #cusForm1 {
-    margin-top: 70px;
+    margin-top: 20px;
     margin-bottom: 50px;
     /*height:  250px;*/
     line-height: 1px;
 }
 
 
-#btn-search1 {
-    margin-left: 50px;
-    padding: 5px 40px;
-    border-radius: 12px;
-}
-#btn-search2 {
+.btn-search {
     margin-left: 50px;
     padding: 5px 40px;
     border-radius: 12px;
@@ -80,11 +75,11 @@
     width: 100%;
     /*overflow-x: scroll;*/
 }
+#infoTabContent{
+    width: 180%;
+}
 
-.data-btn-confirm
-
-
-
+/*input number spinner*/
 .number-input input[type="number"] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;

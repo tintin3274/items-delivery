@@ -4,7 +4,7 @@
       xmlns:th="https://www.thymeleaf.org">
 
 <div layout:fragment="content" class="container">
-    <h1 align="center">Order List</h1>
+    <h1 align="center" style="margin-top: 30px"><strong>Order List</strong></h1>
     <div  id="fill">
         <select id='filterText' class="filterText" style='display:inline-block' onchange='filterText()'>
             <option disabled selected>Select Status</option>
@@ -34,8 +34,6 @@
             </th>
             <th class="th-sm">Action
             </th>
-
-
         </tr>
         </thead>
         <tbody>
@@ -48,7 +46,7 @@
             <td><a class="btn blue-gradient btn-home" role="button" th:href="@{/home/commit/{id}(id=${order.id})}"
                    data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
             >Commit</a>
-                <a class="btn purple-gradient btn-home" role="button" th:href="@{/home/info/{id}(id=${order.id})}" >Info</a>
+                <a class="btn purple-gradient btn-home" role="button" th:href="@{/history_order/info/{id}(id=${order.id})}" >Info</a>
                 <a class="btn peach-gradient btn-home" role="button" th:href="@{/home/cancel/{id}(id=${order.id})}"
                    data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
                 >cancel</a>
@@ -74,9 +72,6 @@
     </table>
 
 <!-- End your project here-->
-
-
-<!--    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
 
     <script>
         $(document).ready(function () {
@@ -113,8 +108,6 @@
         });
     </script>
         <script src="/bootstrap.confirm.js"></script>
-
-
 
 </div>
 

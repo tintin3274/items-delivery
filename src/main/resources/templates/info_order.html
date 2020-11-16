@@ -9,13 +9,13 @@
     <div class="card" style="margin-top: 30px;">
         <div class="card-body">
             <h1>ORDER ID# <span th:text="${Order.getId()}"></span></h1>
-            <h3>NAME:  <span th:text="${Order.getName()}"></span></h3>
+            <h4>NAME:  <span th:text="${Order.getName()}"></span></h4>
         </div>
     </div>
 
 
-    <div class="row" style="margin-top: 40px;">
-            <div class="col-md-4" style="margin-top: 40px;">
+    <div class="row" style="margin-top: 20px;">
+            <div class="col-md-4" style="margin-top: 60px;">
                 <div class="profile-work">
                     <h4>Status <span class="badge badge-primary" th:text="${Order.getStatus()}"></span></h4>
                     <p>Create Date Time  <span th:text="${dateTimeAdapter.changeFormatDateTime(Order.createDatetime)}"></span></p>
@@ -35,10 +35,10 @@
                 </li>
             </ul>
 
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
+            <div class="col-md-8" >
+                <div class="tab-content profile-tab" id="infoTabContent" >
                     <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="home-tab">
-                        <table id="selectedColumn" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="margin-top: 30px;">
+                        <table id="itemsTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="margin-top: 30px;">
                             <thead>
                             <tr>
                                 <th class="th-sm">ID
@@ -47,7 +47,7 @@
                                 </th>
                                 <th class="th-sm">Required
                                 </th>
-                                <th class="th-sm">Quantity
+                                <th class="th-sm">In-stock
                                 </th>
                             </tr>
                             </thead>
@@ -120,5 +120,23 @@
                     </div>
                 </div>
             </div>
+
+        <div class="card" style="margin-top: 30px;">
+            <div class="card-body">
+                <p><strong>ORDER ADDRESS: </strong> <span th:text="${Order.address}"></span></p>
+                <p><strong>ORDER DESCRIPTION:  </strong> <span th:text="${Order.description}"></span></p>
+            </div>
+        </div>
+    <script>
+        $(document).ready(function () {
+            $('#itemsTable').DataTable({
+                "aaSorting": [],
+                columnDefs: [{
+
+                }],
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
         </div>
 
