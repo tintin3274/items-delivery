@@ -47,16 +47,6 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/info/{id}")
-    public String getInfoPage(@PathVariable int id,Model model){
-
-        model.addAttribute("Order",orderRequestService.getOrderRequest(id));
-        model.addAttribute("allItem",itemService.getListItemOrder(id));
-        model.addAttribute("itemService",itemService);
-        model.addAttribute("dateTimeAdapter",new DateTimeAdapter());
-        model.addAttribute("customerService",customerService);
-        return "info_order";
-    }
 
 //    @PostMapping
 //    public String showStatus(Model model) {

@@ -80,9 +80,9 @@
     width: 100%;
     /*overflow-x: scroll;*/
 }
-
-.data-btn-confirm
-
+#infoTabContent{
+    width: 180%;
+}
 
 
 .number-input input[type="number"] {
