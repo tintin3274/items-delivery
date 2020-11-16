@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/items-delivery/order_request")
@@ -36,6 +37,9 @@ public class OrderRequestRestController {
         try {
             return orderRequestRepository.findById(id).get();
         } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (NoSuchElementException e) {
             System.err.println(e.getMessage());
             return null;
         }

@@ -6,6 +6,7 @@ import th.ku.itemsdelivery.repository.ItemRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/items-delivery/item")
@@ -26,6 +27,9 @@ public class ItemRestController {
         try {
             return itemRepository.findById(id).get();
         } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (NoSuchElementException e) {
             System.err.println(e.getMessage());
             return null;
         }
