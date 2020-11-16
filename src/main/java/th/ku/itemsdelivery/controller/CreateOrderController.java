@@ -53,14 +53,8 @@ public class CreateOrderController {
         OrderRequest orderRequest = new OrderRequest(0, name.trim(), null, address.trim(), description,
                 null, localDateTime, null, customer.getId());
 
-        Integer[] itemIDs = (Integer[]) request.getAttribute("duallistbox_demo1[]");
-        //System.err.println(Arrays.toString(itemIDs));
-        ArrayList<ListItemId> listItemId = new ArrayList<>();
-        for(int itemID : itemIDs)
-            listItemId.add(new ListItemId(orderRequest.getId(), itemID));
-
         request.getSession().setAttribute("order", orderRequest);
-        request.getSession().setAttribute("listItemId", listItemId);
+        model.addAttribute("allItem",itemService.getItemAll());
         //System.err.println(customer.toString());
         //System.err.println(orderRequest.toString());
         return "quantity_item";

@@ -85,8 +85,8 @@
                     var ch
                     if(data[2] == 'PENDING - NOT READY'){
                         $(row).find('td:eq(2)').css('color', 'red');
-                        $(row).find('button:eq(0)').css('pointer-events', 'none');
-                        $(row).find('button:eq(0)').css('opacity', '0.4');
+                        $(row).find('a:eq(0)').css('pointer-events', 'none');
+                        $(row).find('a:eq(0)').css('opacity', '0.4');
                     }
                     else if(data[2] == 'PENDING - READY'){
                         $(row).find('td:eq(2)').css('color', 'green');
