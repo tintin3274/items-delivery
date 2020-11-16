@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}"
+      xmlns:th="https://www.thymeleaf.org">
+
+<div class="container" layout:fragment="content">
+
+    <div id="exTab1" class="container">
+        <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#import" role="tab" aria-controls="home" aria-selected="true">Import</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#export" role="tab" aria-controls="profile" aria-selected="false">Export</a>
+            </li>
+        </ul>
+    </div>
+    <!-- Extended default form grid -->
+    <div class="tab-content profile-tab" id="myTabContent">
+        <div class="tab-pane fade show active" id="import" role="tabpanel" aria-labelledby="home-tab">
+            <h2> Import </h2>
+            <hr/>
+            <div  id="fill">
+                <select id='filterRemark' class="filterText" style='display:inline-block' onchange='filterText()'>
+                    <option disabled selected>Select Remark</option>
+                    <option value='arrival'>ARRIVAL</option>
+                    <option value='return'>RETURN</option>
+                    <option value=''>All</option>
+                </select>
+            </div>
+            <table id="importColumn" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
+                <thead>
+                <tr>
+
+                    <th class="th-sm">Item ID
+                    </th>
+                    <th class="th-sm">Item Name
+                    </th>
+                    <th class="th-sm">Quantity
+                    </th>
+                    <th class="th-sm">Import Date Time
+                    </th>
+                    <th class="th-sm">Remark
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="import : ${itemsimport}">
+                    <td th:text="${import.itemId}"></td>
+                    <td th:text="${itemService.getItem(import.itemId).name}"></td>
+                    <td th:text="${import.importQuantity}" > </td>
+                    <td th:text="${dateTimeAdapter.changeFormatDateTime(import.importDatetime)}" > </td>
+                    <td th:text="${import.importRemark}"></td>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Item ID
+                    </th>
+                    <th >Item Name
+                    </th>
+                    <th>Quantity
+                    </th>
+                    <th>Import Date Time
+                    </th>
+                    <th>Remark
+                    </th>
+
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+
+        <div class="tab-pane fade " id="export" role="tabpanel" aria-labelledby="home-tab">
+            <h2>Export </h2>
+            <hr/>
+            <table id="exportColumn" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
+                <thead>
+                <tr>
+
+                    <th class="th-sm">Order ID
+                    </th>
+                    <th class="th-sm">Item ID
+                    </th>
+                    <th class="th-sm">Item Name
+                    </th>
+                    <th class="th-sm">Quantity
+                    </th>
+                    <th class="th-sm">Export Date Time
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="export : ${itemsexport}">
+                    <td th:text="${export.itemExportId.orderId}"></td>
+                    <td th:text="${export.itemExportId.itemId}"></td>
+                    <td th:text="${itemService.getItem(export.itemExportId.itemId).name}" > </td>
+                    <td th:text="${export.exportQuantity}"></td>
+                    <td th:text="${dateTimeAdapter.changeFormatDateTime(export.exportDatetime)}"> </td>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Order ID
+                    </th>
+                    <th >Item ID
+                    </th>
+                    <th>Item Name
+                    </th>
+                    <th>Quantity
+                    </th>
+                    <th>Export Date Time
+                    </th>
+
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#importColumn').DataTable({
+                "aaSorting": [],
+                columnDefs: [{
+                    orderable: false,
+                }],
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#exportColumn').DataTable({
+                "aaSorting": [],
+                columnDefs: [{
+                    orderable: false,
+                }],
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+    <script>
+        $('#filterRemark').on('keyup change',function () {
+            var table= $('#importColumn').DataTable();
+            table.columns(4).search(this.value).draw();
+        });
+    </script>
+</div>

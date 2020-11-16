@@ -5,9 +5,9 @@
 
 <head>
     <!-- common libraries -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
 
     <!-- plugin -->
     <link rel="stylesheet" href="/bootstrap_duallist/bootstrap-duallistbox.css/">
@@ -16,55 +16,84 @@
 </head>
 
 <div layout:fragment="content" class="container">
-    <div class="container">
-        <div class="row" style="margin-top: 40px;">
-            <div class="col">
 
-                <h2> Pay Bills </h2>
-                <p><strong>Step 1:</strong> Select from your list of available payees to build a payment list</p>
+    <div id="exTab1" class="container">
+        <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#owned" role="tab" aria-controls="home" aria-selected="true">Item List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#create" role="tab" aria-controls="profile" aria-selected="false">Customer</a>
+            </li>
+        </ul>
+    </div>
+    <!-- Extended default form grid -->
+    <div class="tab-content profile-tab" id="myTabContent">
+        <div class="tab-pane fade show active" id="owned" role="tabpanel" aria-labelledby="home-tab">
+            <h2> Owned Item </h2>
+            <p>Select from your list of items to add a </p>
+            <hr/>
+            <form id="ownedform" >
+                <select size="15" name="item_box[]" id="item_box" required >
+                    <option th:each="item : ${allItems}" th:value="${item.id}" th:text ="${item.name}"></option>
+                </select>
+
+                <div class="def-number-input number-input safari_only">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus" type="button"></button>
+                    <input class="quantity" min="1" name="quantity" value="1" type="number">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus" type="button"></button>
+                </div>
+
+
+<!--                <div class="form-group">-->
+<!--                    <label for="inputDeposit">Amount</label>-->
+<!--                    <input type="number" required  min="1"   value="1" class="form-control" name="amount"-->
+<!--                           id="inputDeposit">-->
+<!--                </div>-->
+                <button type="submit" class="btn aqua-gradient" id="submitImport1">Submit</button>
+            </form>
+        </div>
+
+        <div class="tab-pane fade " id="create" role="tabpanel" aria-labelledby="home-tab">
+            <form >
+                <h2>Create New Item </h2>
+                <p>fill every field</p>
                 <hr/>
-            </div>
-        </div>
-        <div class="row" style="margin-bottom: 40px;">
-            <div class="col">
-                <form id="demoform">
-                    <select  size="10" name="duallistbox_demo1[]" title="duallistbox_demo1[]">
-                        <option value="payee1">Aviva Insurance - Business - 987654</option>
-                        <option value="payee2">Bell Mobility - 66853 (John Smith)</option>
-                        <option value="payee3">Bell Mobility - 75432 (Jane Smith)</option>
-                        <option value="payee4">Bell Mobility - 98765 (Jim Smith)</option>
-                        <option value="payee5">Canadian Tire Commercial Mastercard - **** 5525</option>
-                        <option value="payee6">Canadian Tire Mastercard - **** 3158 (President's Card)</option>
-                        <option value="payee7">FedEx Express Canada - 54321</option>
-                        <option value="payee8">Lowes Canada - 12345</option>
-                        <option value="payee9">Mastercard, PC Financial - **** 5535</option>
-                        <option value="payee10">Qtrade Investor - 12345</option>
-                        <option value="payee11">Servus Mastercard - **** 5545</option>
-                        <option value="payee12">Telus - 123456787 (Calagary  Office)</option>
-                        <option value="payee13">Telus - 123456788 (Edmonton NW Office)</option>
-                        <option value="payee14">Telus - 123456789 (Edmonton SE Office)</option>
-                    </select>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6 offset-md-6">
-                            <button type="submit" class="btn btn-primary w-100">Create payment (#)</button>
-                        </div>
+                <div class="form-group">
+                    <label for="inputAddress">Name</label>
+                    <input type="text" class="form-control" id="inputAddress" required>
+                </div>
+                <!-- Grid row -->
+                <div class="form-row">
+                    <!-- Default input -->
+                    <div class="form-group col-md-6">
+                        <label for="inputDeposit1">Amount</label>
+                        <input type="number" required  min="1"   class="form-control" name="amount"
+                               id="inputDeposit1" >
                     </div>
-                </form>
-
-            </div>
+                    <!-- Default input -->
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Unit</label>
+                        <input type="text" class="form-control" id="inputEmail4" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDes">Description</label>
+                    <textarea class="form-control rounded-0" id="inputDes" rows="10" required></textarea>
+                </div>
+                <!-- Grid row -->
+                <button type="submit" class="btn aqua-gradient" id="submitImport2">Submit</button>
+            </form>
+            <hr/>
         </div>
+
     </div>
-    <div class="form-group">
-        <label for="inputDeposit">Amount</label>
-        <input type="number" required  min="1"   class="form-control" name="amount"
-               id="inputDeposit">
-    </div>
+    <!-- Extended default form grid -->
 
     <script>
-        var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox({
-            nonSelectedListLabel: 'Available Payees',
-            selectedListLabel: 'Selected Payees',
+        var demo1 = $('select[name="item_box[]"]').bootstrapDualListbox({
+            nonSelectedListLabel: 'Available Items',
+            selectedListLabel: 'Selected Items',
             preserveSelectionOnMove: 'moved',
             moveAllLabel: '',
             removeAllLabel: ''
