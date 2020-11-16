@@ -14,12 +14,12 @@
             <!-- Default input -->
             <div class="form-group col-md-6">
                 <label for="inputFirstName">First name</label>
-                <input type="text" class="form-control" id="inputFirstName" name="firstname" path="customer">
+                <input type="text" class="form-control" id="inputFirstName" name="firstname" path="customer" required>
             </div>
             <!-- Default input -->
             <div class="form-group col-md-6">
                 <label for="inputLastName">Last name</label>
-                <input type="text" class="form-control" id="inputLastName" name="lastname" path="customer">
+                <input type="text" class="form-control" id="inputLastName" name="lastname" path="customer" required>
             </div>
         </div>
         <!-- Grid row -->
@@ -29,6 +29,10 @@
         <div class="form-group">
             <label for="inputPhone">Phone Number</label>
             <input type="tel" class="form-control" id="inputPhone" name="phoneNumber" path="customer" placeholder="10-20 digit " pattern="[0-9]{10-20}" required>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="submit">
         </div>
 
     </form>

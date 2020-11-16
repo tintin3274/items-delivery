@@ -40,6 +40,6 @@ public class CreateCustomerController {
         else{
             customer = customerService.createCustomer(customer);
         }
-        return "create_order/customer_id="+customer.getId();
+        return "redirect:/create_order/customer_id="+customer.getId();
     }
 }
