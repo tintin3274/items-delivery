@@ -4,7 +4,7 @@
       xmlns:th="https://www.thymeleaf.org">
 
 <div layout:fragment="content" class="container">
-    <h1 align="center">Order List</h1>
+    <h1 align="center" style="margin-top: 30px"><strong>Order List</strong></h1>
     <div  id="fill">
         <select id='filterText' class="filterText" style='display:inline-block' onchange='filterText()'>
             <option disabled selected>Select Status</option>
@@ -34,8 +34,6 @@
             </th>
             <th class="th-sm">Action
             </th>
-
-
         </tr>
         </thead>
         <tbody>
@@ -75,9 +73,6 @@
 
 <!-- End your project here-->
 
-
-<!--    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
-
     <script>
         $(document).ready(function () {
             $('#selectedColumn').DataTable({
@@ -113,8 +108,6 @@
         });
     </script>
         <script src="/bootstrap.confirm.js"></script>
-
-
 
 </div>
 
