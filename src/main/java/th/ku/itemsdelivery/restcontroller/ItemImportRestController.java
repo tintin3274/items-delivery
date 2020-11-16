@@ -9,6 +9,7 @@ import th.ku.itemsdelivery.repository.ItemRepository;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/items-delivery/item_import")
@@ -31,6 +32,9 @@ public class ItemImportRestController {
         try {
             return itemImportRepository.findById(id).get();
         } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (NoSuchElementException e) {
             System.err.println(e.getMessage());
             return null;
         }
