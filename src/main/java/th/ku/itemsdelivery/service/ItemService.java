@@ -97,8 +97,7 @@ public class ItemService {
 
     public ListItem createListItem(ListItem listItem) {
         String url = "http://localhost:8090/api/items-delivery/list_item";
-        ResponseEntity<ListItem> responseEntity = restTemplate.getForEntity(url, ListItem.class);
-        ListItem listItemResponse = responseEntity.getBody();
+        ListItem listItemResponse = restTemplate.postForObject(url, listItem, ListItem.class);
         return listItemResponse;
     }
 
