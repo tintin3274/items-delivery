@@ -22,6 +22,9 @@ import java.util.Locale;
 @RequestMapping("/create_order")
 public class CreateOrderController {
     @Autowired
+    private ItemService itemService;
+
+    @Autowired
     private CustomerService customerService;
 
     @GetMapping
@@ -47,10 +50,11 @@ public class CreateOrderController {
         LocalDateTime localDateTime = LocalDateTime.parse(dueDateTime, dateTimeFormatter);
         OrderRequest orderRequest = new OrderRequest(0, name.trim(), null, address.trim(), description,
                 null, localDateTime, null, customer.getId());
-        redirectAttributes.addFlashAttribute(orderRequest);
-        //model.addAttribute("allItems", itemService.getItemAll());
+        //redirectAttributes.addFlashAttribute(orderRequest);
+        request.getSession().setAttribute("order", orderRequest);
+        model.addAttribute("allItems", itemService.getItemAll());
         //System.err.println(customer.toString());
         //System.err.println(orderRequest.toString());
-        return "redirect:/select_item";
+        return "select_item";
     }
 }

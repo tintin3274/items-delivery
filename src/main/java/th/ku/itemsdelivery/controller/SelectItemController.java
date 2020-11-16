@@ -30,8 +30,8 @@ public class SelectItemController {
         //model.addAttribute("order", orderRequest);
         request.getSession().setAttribute("order", orderRequest);
         model.addAttribute("allItems", itemService.getItemAll());
-        System.err.println( request.getSession().getAttribute("order").toString());
-        //System.err.println(orderRequest.toString());
+//        System.err.println( request.getSession().getAttribute("order").toString());
+//        System.err.println(orderRequest.toString());
         return "select_item";
     }
 
@@ -42,6 +42,8 @@ public class SelectItemController {
 //            System.err.println(orderRequest.toString());
 //        else
 //            System.err.println("WHY!?");
+        String[] s = request.getParameterValues("duallistbox_demo1[]");
+        System.err.println(Arrays.toString(s));
 
         return "redirect:/home";
         //return "select_item";
