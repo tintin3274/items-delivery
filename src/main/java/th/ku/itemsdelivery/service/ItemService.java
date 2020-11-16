@@ -3,10 +3,7 @@ package th.ku.itemsdelivery.service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import th.ku.itemsdelivery.model.Item;
-import th.ku.itemsdelivery.model.ItemExport;
-import th.ku.itemsdelivery.model.ItemImport;
-import th.ku.itemsdelivery.model.ListItem;
+import th.ku.itemsdelivery.model.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,8 +33,7 @@ public class ItemService {
 
     public Item createItem(Item item) {
         String url = "http://localhost:8090/api/items-delivery/item";
-        ResponseEntity<Item> responseEntity = restTemplate.getForEntity(url, Item.class);
-        Item itemResponse = responseEntity.getBody();
+        Item itemResponse = restTemplate.postForObject(url, item, Item.class);
         return itemResponse;
     }
 
