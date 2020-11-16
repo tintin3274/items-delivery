@@ -5,6 +5,7 @@
 
 
 <div layout:fragment="content" class="container">
+    <h1 style="margin-top: 30px;text-align: center"><strong>Customer Search</strong></h1>
     <form action="#" class="border border-light p-5" id="cusForm1" th:action="@{/search_customer/searchName}" method="POST">
         <!-- Grid row -->
         <div class="form-row">
@@ -21,14 +22,14 @@
         </div>
         <!-- Grid row -->
 
-            <!-- Default input -->
-            <!-- Default input -->
+        <!-- Default input -->
+        <!-- Default input -->
         <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputTel">Tel.</label>
-                    <input type="text" class="form-control" id="inputTel" name="Tel">
-                </div>
-            <input class="btn purple-gradient " id="btn-search1" type="submit" ></input>
+            <div class="form-group col-md-6">
+                <label for="inputTel">Tel.</label>
+                <input type="text" class="form-control" id="inputTel" name="Tel">
+            </div>
+            <input class="btn purple-gradient btn-search"  type="submit" ></input>
         </div>
         <!-- Grid row -->
     </form>
@@ -37,9 +38,9 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputId">ID</label>
-                <input type="number" class="form-control" id="inputId"  name="Id">
+                <input type="number" class="form-control" id="inputId"  required name="Id">
             </div>
-            <input class="btn purple-gradient" type="submit" id="btn-search2"></input>
+            <input class="btn purple-gradient btn-search" type="submit" ></input>
         </div>
     </form>
 
@@ -86,6 +87,9 @@
     <script>
         $(document).ready(function () {
             $('#dtBasicExample').DataTable({
+                "columnDefs": [
+                    { "width": "10%", "targets": 4}
+                ]
             });
             $('.dataTables_length').addClass('bs-select');
         });
