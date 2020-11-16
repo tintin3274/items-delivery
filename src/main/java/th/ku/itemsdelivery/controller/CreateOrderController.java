@@ -22,25 +22,28 @@ import java.util.Locale;
 @RequestMapping("/create_order")
 public class CreateOrderController {
     @Autowired
+    private ItemService itemService;
     private CustomerService customerService;
 
-    @GetMapping
-    public String getCreatePage(){return "create_order";}
+    public CreateOrderController(ItemService itemService, CustomerService customerService) {
+        this.itemService = itemService;
+        this.customerService = customerService;
+    }
+
+    @GetMapping("/customer_id={id}")
+    public String getCreatePage(@PathVariable int id,Model model){
+        model.addAttribute("allItems",itemService.getItemAll());
+        return "create_order";
+    }
 
     @PostMapping
-    public String createOrder(@RequestParam String firstname, @RequestParam String lastname,
-                              @RequestParam String phoneNumber, @RequestParam String name,
+    public String createOrder( @RequestParam String name,
                               @RequestParam String address, @RequestParam String dueDateTime,
                               @RequestParam String description, ModelMap model, RedirectAttributes redirectAttributes,
                               HttpServletResponse response, HttpServletRequest request) {
 
-        Customer customer = new Customer(0, firstname.trim(), lastname.trim(), phoneNumber.trim());
-        if(customerService.getFindCustomerEqual(customer.getFirstname(), customer.getLastname(), customer.getPhoneNumber()) != null){
-            customer = customerService.getFindCustomerEqual(customer.getFirstname(), customer.getLastname(), customer.getPhoneNumber());
-        }
-        else{
-            customer = customerService.createCustomer(customer);
-        }
+        Customer customer = customerService.getCustomer()
+
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a", Locale.US);
         //System.err.println(dueDateTime);
