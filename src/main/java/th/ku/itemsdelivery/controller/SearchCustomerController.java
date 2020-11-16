@@ -22,7 +22,8 @@ public class SearchCustomerController {
     }
 
     @GetMapping
-    public String getPage (){
+    public String getPage (Model model){
+        model.addAttribute("selectedCustomer",customerService.getCustomerAll());
         return "search_customer";
     }
 
@@ -35,10 +36,14 @@ public class SearchCustomerController {
 
     @PostMapping("/searchId")
     public String searchCustomerId(@RequestParam Integer Id, Model model){
-        ArrayList<Customer> customer = new ArrayList<>();
-        customer.add(customerService.getCustomer(Id));
-        model.addAttribute("selectedCustomer",customer);
-        System.err.println(customer);
+        ArrayList<Customer> customers = new ArrayList<>();
+        Customer customer = customerService.getCustomer(Id);
+        if(customer != null) {
+            customers.add(customer);
+        }
+        model.addAttribute("selectedCustomer",customers);
+
+        System.err.println(customers);
         return "search_customer";
     }
 
