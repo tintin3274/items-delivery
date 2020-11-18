@@ -7,7 +7,7 @@
 <div layout:fragment="content" class="container">
     <h1>List Of Items</h1>
 
-    <table id="selectedColumn" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <table id="inStockColumn" class="table table-striped table-bordered table-sm haveNewLine" cellspacing="0" width="100%">
 
         <thead>
         <tr>
@@ -64,7 +64,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#selectedColumn').DataTable({
+            $('#inStockColumn').DataTable({
                 "aaSorting": [],
                 columnDefs: [{
                     orderable: false,
