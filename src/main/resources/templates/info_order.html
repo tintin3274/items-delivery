@@ -7,9 +7,9 @@
 <div layout:fragment="content" class="container">
 
     <div class="card" style="margin-top: 30px;">
-        <div class="card-body">
-            <h1>ORDER ID# <span th:text="${Order.getId()}"></span></h1>
-            <h4>NAME:  <span th:text="${Order.getName()}"></span></h4>
+        <div class="card-body ">
+            <h1>ORDER ID# <span th:text="${Order.getId()}" ></span></h1>
+            <h4 class="haveNewLine">NAME:  <span th:text="${Order.getName()}"></span></h4>
         </div>
     </div>
 
@@ -35,7 +35,7 @@
                 </li>
             </ul>
 
-            <div class="col-md-8" >
+            <div class="col-md-8" style="margin-top: 30px;">
                 <div class="tab-content profile-tab" id="infoTabContent" >
                     <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="home-tab">
                         <table id="itemsTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="margin-top: 30px;">
@@ -47,7 +47,7 @@
                                 </th>
                                 <th class="th-sm">Required
                                 </th>
-                                <th class="th-sm">Quantity
+                                <th class="th-sm">In-stock
                                 </th>
                             </tr>
                             </thead>
@@ -66,7 +66,7 @@
                                 </th>
                                 <th >Required
                                 </th>
-                                <th>Quantity
+                                <th>In-stock
                                 </th>
                             </tr>
                             </tfoot>
@@ -121,10 +121,10 @@
                 </div>
             </div>
 
-        <div class="card" style="margin-top: 30px;">
+        <div class="card " style="margin-top: 30px;">
             <div class="card-body">
-                <p><strong>ORDER ADDRESS: </strong> <span th:text="${Order.address}"></span></p>
-                <p><strong>ORDER DESCRIPTION:  </strong> <span th:text="${Order.description}"></span></p>
+                <br><strong>ORDER ADDRESS: </strong> </br><span th:text="${Order.address}"></span></p>
+                <p><strong>ORDER DESCRIPTION:  </strong> </br> <span th:text="${Order.description}" class="haveNewLine"></span></p>
             </div>
         </div>
     <script>

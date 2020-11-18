@@ -6,7 +6,7 @@
 
 
 <div class="container" layout:fragment="content">
-    <h1 align="center">Order History</h1>
+    <h1 align="center" style="margin-top: 30px"><strong>Order History</strong></h1>
     <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" >
         <thead>
         <tr>
@@ -60,6 +60,22 @@
     <script>
         $(document).ready(function () {
             $('#dtBasicExample').DataTable({
+
+                initComplete: function () {
+                    this.api().columns().every( function () {
+                        var column = this;
+                        var search = $(`<input class="form-control form-control-sm" type="text" placeholder="Search">`)
+                            .appendTo( $(column.footer()).empty() )
+                            .on( 'change input', function () {
+                                var val = $(this).val()
+
+                                column
+                                    .search( val ? val : '', true, false )
+                                    .draw();
+                            } );
+
+                    } );
+                },
                 rowCallback: function(row, data, index) {
                     var ch
                     if (data[2] == 'CANCEL') {
