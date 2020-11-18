@@ -21,7 +21,20 @@
 
         <thead>
         <tr>
-
+            <th class="th-sm">ID
+            </th>
+            <th class="th-sm">Order Name
+            </th>
+            <th class="th-sm">Status
+            </th>
+            <th class="th-sm">Create-Date
+            </th>
+            <th class="th-sm">Due-Date
+            </th>
+            <th class="th-sm">Action
+            </th>
+        </tr>
+        <tr>
             <th class="th-sm">ID
             </th>
             <th class="th-sm">Order Name
@@ -43,11 +56,11 @@
             <td th:text="${order.status}" class="bold"> </td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
-            <td><a class="btn blue-gradient btn-home" role="button" th:href="@{/home/commit/{id}(id=${order.id})}"
+            <td><a class="btn blue-gradient btn-home" role="button" th:href="@{/items_delivery/home/commit/{id}(id=${order.id})}"
                    data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
             >Commit</a>
-                <a class="btn purple-gradient btn-home" role="button" th:href="@{/history_order/info/{id}(id=${order.id})}" >Info</a>
-                <a class="btn peach-gradient btn-home" role="button" th:href="@{/home/cancel/{id}(id=${order.id})}"
+                <a class="btn purple-gradient btn-home" role="button" th:href="@{/items_delivery/history_order/info/{id}(id=${order.id})}" >Info</a>
+                <a class="btn peach-gradient btn-home" role="button" th:href="@{/items_delivery/home/cancel/{id}(id=${order.id})}"
                    data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
                 >cancel</a>
             </td>
@@ -76,6 +89,21 @@
     <script>
         $(document).ready(function () {
             $('#selectedColumn').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var search = $(`<input class="form-control form-control-sm" type="text" placeholder="Search">`)
+                            .appendTo($(column.header()).empty())
+                            .on('change input', function () {
+                                var val = $(this).val()
+
+                                column
+                                    .search(val ? val : '', true, false)
+                                    .draw();
+                            });
+
+                    });
+                },
                 "aaSorting": [],
                 columnDefs: [{
                     orderable: false,

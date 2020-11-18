@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @Controller
-@RequestMapping("/import_item")
+@RequestMapping("/items_delivery/import_item")
 public class ImportItemController {
     @Autowired
     private ItemService itemService;
@@ -33,7 +33,7 @@ public class ImportItemController {
 
         //System.err.println(itemId+" "+quantity);
         itemService.createItemImport(itemId, quantity);
-        return "redirect:/import_item";
+        return "redirect:/items_delivery/import_item";
     }
 
     @PostMapping("/create_item")
@@ -43,6 +43,6 @@ public class ImportItemController {
         item = itemService.createItem(item);
         //System.err.println(item.toString());
         itemService.createItemImport(item.getId(), quantity);
-        return "redirect:/import_item";
+        return "redirect:/items_delivery/import_item";
     }
 }

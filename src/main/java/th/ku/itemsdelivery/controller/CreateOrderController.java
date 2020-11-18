@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 @Controller
-@RequestMapping("/create_order")
+@RequestMapping("/items_delivery/create_order")
 public class CreateOrderController {
     @Autowired
     private ItemService itemService;
@@ -47,7 +47,7 @@ public class CreateOrderController {
 
         Customer customer = (Customer) request.getSession().getAttribute("customer");
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a", Locale.US);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         //System.err.println(dueDateTime);
         LocalDateTime localDateTime = LocalDateTime.parse(dueDateTime, dateTimeFormatter);
         OrderRequest orderRequest = new OrderRequest(0, name.trim(), null, address.trim(), description,

@@ -13,7 +13,7 @@ import th.ku.itemsdelivery.service.CustomerService;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/search_customer")
+@RequestMapping("/items_delivery/search_customer")
 public class SearchCustomerController {
     private CustomerService customerService;
 

@@ -42,7 +42,7 @@
             <h2  style="margin-top: 30px"><strong> Owned Item </strong></h2>
             <p>Select only one item from list of items </p>
             <hr/>
-            <form id="ownedform" th:action="@{/import_item/import}" method="POST">
+            <form id="ownedform" th:action="@{/items_delivery/import_item/import}" method="POST">
                 <select size="15" name="item_box[]" id="item_box" required class="selectpicker" data-live-search="true" data-width="75%" >
                     <option th:each="item : ${allItems}" th:value="${item.id}" th:text ="${item.name}"
                             th:data-tokens="${item.id}" style="font-size: medium">
@@ -64,7 +64,7 @@
         </div>
 
         <div class="tab-pane fade " id="create" role="tabpanel" aria-labelledby="home-tab">
-            <form th:action="@{/import_item/create_item}" method="POST">
+            <form th:action="@{/items_delivery/import_item/create_item}" method="POST">
                 <h2  style="margin-top: 30px"><strong>Create New Item </strong></h2>
                 <div class="form-group">
                     <label for="inputName">Name</label>

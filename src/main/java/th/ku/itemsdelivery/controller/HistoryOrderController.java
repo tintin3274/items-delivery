@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/history_order")
+@RequestMapping("/items_delivery/history_order")
 public class HistoryOrderController {
     private OrderRequestService orderRequestService;
     private ItemService itemService;
