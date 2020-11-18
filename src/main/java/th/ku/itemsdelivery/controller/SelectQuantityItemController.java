@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-@RequestMapping("/quantity_item")
+@RequestMapping("/items_delivery/quantity_item")
 public class SelectQuantityItemController {
     @Autowired
     private OrderRequestService orderRequestService;
@@ -70,6 +70,6 @@ public class SelectQuantityItemController {
         for(ListItem listItem : listItems)
             itemService.createListItem(listItem);
 
-        return "redirect:/home";
+        return "redirect:/items_delivery/home";
     }
 }

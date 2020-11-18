@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @Controller
-@RequestMapping("/create_customer")
+@RequestMapping("/items_delivery/create_customer")
 public class CreateCustomerController {
     private CustomerService customerService;
 
@@ -40,6 +40,6 @@ public class CreateCustomerController {
         else{
             customer = customerService.createCustomer(customer);
         }
-        return "redirect:/create_order/customer_id="+customer.getId();
+        return "redirect:/items_delivery/create_order/customer_id="+customer.getId();
     }
 }

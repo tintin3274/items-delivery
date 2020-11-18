@@ -25,6 +25,22 @@
             <th class="th-sm">Action
             </th>
         </tr>
+        <tr>
+            <th class="th-sm">ID
+            </th>
+            <th class="th-sm">Order Name
+            </th>
+            <th class="th-sm">Status
+            </th>
+            <th class="th-sm">Create-Date
+            </th>
+            <th class="th-sm">Due-Date
+            </th>
+            <th class="th-sm">Last Update
+            </th>
+            <th class="th-sm">Action
+            </th>
+        </tr>
         </thead>
         <tbody>
         <tr th:each="historyOrder : ${allHistoryOrders}">
@@ -34,7 +50,7 @@
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.createDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.dueDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.lastUpdateDatetime)}"></td>
-            <td > <a class="btn purple-gradient btn-home" role="button" th:href="@{/history_order/info/{id}(id=${historyOrder.id})}" >Info</a></td>
+            <td > <a class="btn purple-gradient btn-home" role="button" th:href="@{/items_delivery/history_order/info/{id}(id=${historyOrder.id})}" >Info</a></td>
         </tr>
         </tbody>
         <tfoot>
@@ -65,7 +81,7 @@
                     this.api().columns().every( function () {
                         var column = this;
                         var search = $(`<input class="form-control form-control-sm" type="text" placeholder="Search">`)
-                            .appendTo( $(column.footer()).empty() )
+                            .appendTo( $(column.header()).empty() )
                             .on( 'change input', function () {
                                 var val = $(this).val()
 

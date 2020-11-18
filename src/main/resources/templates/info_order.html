@@ -17,7 +17,7 @@
     <div class="row" style="margin-top: 20px;">
             <div class="col-md-4" style="margin-top: 60px;">
                 <div class="profile-work">
-                    <h4>Status <span class="badge badge-primary" th:text="${Order.getStatus()}"></span></h4>
+                    <h4>Status <span class="badge" th:text="${Order.getStatus()}" id="statusLabel" style="background: dodgerblue"></span></h4>
                     <p>Create Date Time  <span th:text="${dateTimeAdapter.changeFormatDateTime(Order.createDatetime)}"></span></p>
                     <p>Due Date Time  <span th:text="${dateTimeAdapter.changeFormatDateTime(Order.dueDatetime)}"></span></p>
                     <p>Last Update Date Time  <span th:text="${dateTimeAdapter.changeFormatDateTime(Order.lastUpdateDatetime)}"></span></p>
@@ -120,6 +120,22 @@
                     </div>
                 </div>
             </div>
+<script>
+
+    $(document).ready(function () {
+        var st = document.getElementById('statusLabel').textContent;
+        if (st == 'CANCEL' ) {
+            document.getElementById('statusLabel').style.background = "red";
+        }
+        else if (st == 'SUCCESS'){
+            document.getElementById('statusLabel').style.background = "green";
+        }
+        else if (st == 'PENDING'){
+            document.getElementById('statusLabel').style.background = "orange";
+        }
+    });
+
+</script>
 
         <div class="card " style="margin-top: 30px;">
             <div class="card-body">
