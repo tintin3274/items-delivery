@@ -6,14 +6,21 @@
 <div layout:fragment="content" class="container">
     <h1 align="center" style="margin-top: 30px"><strong>Order List</strong></h1>
     <div  id="fill">
-        <select id='filterText' class="filterText" style='display:inline-block' onchange='filterText()'>
-            <option disabled selected>Select Status</option>
-            <option value='pending'>Pending</option>
-            <option value='"PENDING - READY"'>Pending - Ready</option>
-            <option value='PENDING - NOT READY'>Pending -  Not Ready</option>
-            <option value='progress'>Progress</option>
-            <option value=''>All</option>
-        </select>
+        <div class="row">
+            <div class="col-8">
+                <h5 style="margin-top: 40px;float: right" >Search by status</h5>
+            </div>
+            <div class="col-4">
+                <select id='filterText' class="filterText" style='display:inline-block' onchange='filterText()'>
+                    <option disabled selected>Select Status</option>
+                    <option value='pending'>Pending</option>
+                    <option value='"PENDING - READY"'>Pending - Ready</option>
+                    <option value='PENDING - NOT READY'>Pending -  Not Ready</option>
+                    <option value='progress'>Progress</option>
+                    <option value=''>All</option>
+                </select>
+            </div>
+        </div>
     </div>
 <!-- Start your project here-->
 
