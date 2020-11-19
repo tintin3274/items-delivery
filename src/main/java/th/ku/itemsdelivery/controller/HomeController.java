@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/items_delivery/home")
 public class HomeController {
     private OrderRequestService orderRequestService;
     private ItemService itemService;
@@ -47,26 +47,10 @@ public class HomeController {
         return "home";
     }
 
-
-//    @PostMapping
-//    public String showStatus(Model model) {
-//        List<OrderRequest> ordersPendinglist = new ArrayList<OrderRequest>();
-//        for(OrderRequest order : orderRequestService.getOrders())
-//            if(orderRequestService.checkStatus(order) = "PENDING")
-//                ordersPendinglist.add(order);
-//        model.addAttribute("allOrders", ordersPendinglist);
-//        return "redirect:home";
-//    }
-
-//    @PostMapping
-//    public String registerCustomer(@ModelAttribute OrderRequest orderRequest, Model model) {
-//        model.addAttribute("order", orderRequest);
-//        return "redirect:home";
-//    }
     @GetMapping("/cancel/{id}")
     public String cancelOrder(@PathVariable int id){
         orderRequestService.cancelOrderRequest(id);
-        return "redirect:/home";
+        return "redirect:/items_delivery/home";
     }
 
     @GetMapping("/commit/{id}")
@@ -77,6 +61,6 @@ public class HomeController {
             default:
         }
 
-        return "redirect:/home";
+        return "redirect:/items_delivery/home";
     }
 }
