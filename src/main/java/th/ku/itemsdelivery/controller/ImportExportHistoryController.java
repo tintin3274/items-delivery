@@ -8,7 +8,7 @@ import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.service.ItemService;
 
 @Controller
-@RequestMapping("/items_delivery/im_ex_history")
+@RequestMapping("/items-delivery/im_ex_history")
 public class ImportExportHistoryController {
     private ItemService itemService;
 

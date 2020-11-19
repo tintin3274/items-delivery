@@ -5,31 +5,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
-import th.ku.itemsdelivery.service.CustomerService;
-import th.ku.itemsdelivery.service.ItemService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping("/items_delivery/home")
+@RequestMapping({"/items-delivery/home", "/items-delivery"})
 public class HomeController {
     private OrderRequestService orderRequestService;
-    private ItemService itemService;
-    private CustomerService customerService;
 
-    public HomeController(OrderRequestService orderRequestService, ItemService itemService, CustomerService customerService) {
+    public HomeController(OrderRequestService orderRequestService) {
         this.orderRequestService = orderRequestService;
-        this.itemService = itemService;
-        this.customerService = customerService;
     }
 
     @GetMapping
     public String getHomePage(Model model){
-        ArrayList<OrderRequest> currentOrderslist=new ArrayList<>();
+        ArrayList<OrderRequest> currentOrdersList=new ArrayList<>();
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
         List<OrderRequest> pendingOrderList = orderRequestService.getOrderRequestStatusAll("PENDING");
         HashMap<Integer, Boolean> checkOrder = orderRequestService.pendingCheckOrderRequestItemAll();
@@ -40,9 +33,9 @@ public class HomeController {
                 orderRequest.setStatus("PENDING - NOT READY");
         }
 
-        currentOrderslist.addAll(pendingOrderList);
-        currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
-        model.addAttribute("allOrders",currentOrderslist);
+        currentOrdersList.addAll(pendingOrderList);
+        currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
+        model.addAttribute("allOrders",currentOrdersList);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
         return "home";
     }
@@ -50,7 +43,7 @@ public class HomeController {
     @GetMapping("/cancel/{id}")
     public String cancelOrder(@PathVariable int id){
         orderRequestService.cancelOrderRequest(id);
-        return "redirect:/items_delivery/home";
+        return "redirect:/items-delivery/home";
     }
 
     @GetMapping("/commit/{id}")
@@ -61,6 +54,6 @@ public class HomeController {
             default:
         }
 
-        return "redirect:/items_delivery/home";
+        return "redirect:/items-delivery/home";
     }
 }

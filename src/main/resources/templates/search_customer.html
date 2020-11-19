@@ -6,7 +6,7 @@
 
 <div layout:fragment="content" class="container">
     <h1 style="margin-top: 30px;text-align: center"><strong>Customer Search</strong></h1>
-    <form action="#" class="border border-light p-5" id="cusForm1" th:action="@{/items_delivery/search_customer/searchName}" method="POST">
+    <form action="#" class="border border-light p-5" id="cusForm1" th:action="@{/items-delivery/search_customer/searchName}" method="POST">
         <!-- Grid row -->
         <div class="form-row">
             <!-- Default input -->
@@ -34,7 +34,7 @@
         <!-- Grid row -->
     </form>
 
-    <form class="border border-light p-5" id="cusForm2" th:action="@{/items_delivery/search_customer/searchId}" method="POST">
+    <form class="border border-light p-5" id="cusForm2" th:action="@{/items-delivery/search_customer/searchId}" method="POST">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputId">ID</label>
@@ -65,7 +65,7 @@
             <td th:text="${customer.firstname}"></td>
             <td th:text="${customer.lastname}" ></td>
             <td th:text="${customer.phoneNumber}"></td>
-            <td > <a class="btn purple-gradient btn-home" role="button" th:href="@{/items_delivery/create_order/customer_id={id}(id=${customer.id})}">Select</a></td>
+            <td > <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/create_order/customer_id={id}(id=${customer.id})}">Select</a></td>
         </tr>
         </tbody>
         <tfoot>

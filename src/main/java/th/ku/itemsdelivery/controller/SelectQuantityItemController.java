@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import th.ku.itemsdelivery.model.ListItem;
 import th.ku.itemsdelivery.model.ListItemId;
 import th.ku.itemsdelivery.model.OrderRequest;
@@ -17,12 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-@RequestMapping("/items_delivery/quantity_item")
+@RequestMapping("/items-delivery/quantity_item")
 public class SelectQuantityItemController {
     @Autowired
     private OrderRequestService orderRequestService;
@@ -70,6 +68,6 @@ public class SelectQuantityItemController {
         for(ListItem listItem : listItems)
             itemService.createListItem(listItem);
 
-        return "redirect:/items_delivery/home";
+        return "redirect:/items-delivery/home";
     }
 }
