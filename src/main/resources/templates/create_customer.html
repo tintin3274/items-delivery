@@ -7,11 +7,11 @@
     <h1 align="center" style="margin-top: 30px" ><strong >Create Order</strong></h1>
     <hr/>
     <h2 style="margin-top: 30px">Regular Customer</h2>
-    <a th:href="@{/items_delivery/search_customer}" class="btn aqua-gradient" role="button" >regular customer</a>
+    <a th:href="@{/items-delivery/search_customer}" class="btn aqua-gradient" role="button" >regular customer</a>
     <hr/>
     <h2 style="margin-top: 30px">New Customer</h2>
 
-    <form class="border border-light p-5" action="#" th:action="@{/items_delivery/create_customer}" method="POST">
+    <form class="border border-light p-5" action="#" th:action="@{/items-delivery/create_customer}" method="POST">
         <!-- Grid row -->
         <div class="form-row">
             <!-- Default input -->
@@ -32,13 +32,12 @@
         <div class="form-group">
             <label for="inputPhone">Phone Number</label>
             <input type="tel" class="form-control" id="inputPhone" name="phoneNumber" path="customer"
-                   pattern="^(?:\d{8}(?:\d{2}(?:\d{2})?)?|\(\+?\d{2,3}\)\s?(?:\d{4}[\s*.-]?\d{4}|\d{3}[\s*.-]?\d{3}|\d{2}([\s*.-]?)\d{2}\1\d{2}(?:\1\d{2})?))
-                   |\(\+?\d{2,3}\)\d{9,15}$"
+                   pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]{9,}$"
                    required>
         </div>
 
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="submit">
+            <input type="submit" class="btn blue-gradient" value="submit">
         </div>
 
     </form>

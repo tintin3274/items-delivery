@@ -3,7 +3,7 @@
 <!--Main Navigation-->
 <header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
     <nav class="navbar navbar-expand-lg navbar-dark default-color">
-        <a class="navbar-brand" th:href="@{/home}"><strong>Items Delivery</strong></a>
+        <a class="navbar-brand" th:href="@{/items-delivery/home}"><strong>Items Delivery</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,22 +11,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/items_delivery/home}" >Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/items-delivery/home}" >Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/items_delivery/create_customer}" >Create Order</a>
+                    <a class="nav-link" th:href="@{/items-delivery/create_customer}" >Create Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/items_delivery/history_order}" >Order History</a>
+                    <a class="nav-link" th:href="@{/items-delivery/history_order}" >Order History</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/items_delivery/im_ex_history}">Import-Export History</a>
+                    <a class="nav-link" th:href="@{/items-delivery/im_ex_history}">Import-Export History</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/items_delivery/instock_items}" >In-Stock</a>
+                    <a class="nav-link" th:href="@{/items-delivery/instock_items}" >In-Stock</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/items_delivery/import_item}" >Import Item</a>
+                    <a class="nav-link" th:href="@{/items-delivery/import_item}" >Import Item</a>
                 </li>
             </ul>
 <!--            <ul class="navbar-nav nav-flex-icons">-->

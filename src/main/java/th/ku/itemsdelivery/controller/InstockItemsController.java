@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import th.ku.itemsdelivery.service.ItemService;
 
 @Controller
-@RequestMapping("/items_delivery/instock_items")
+@RequestMapping("/items-delivery/instock_items")
 public class InstockItemsController {
     private ItemService itemService ;
 

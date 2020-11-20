@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import th.ku.itemsdelivery.model.Customer;
 import th.ku.itemsdelivery.service.CustomerService;
 
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/items_delivery/search_customer")
+@RequestMapping("/items-delivery/search_customer")
 public class SearchCustomerController {
     private CustomerService customerService;
 

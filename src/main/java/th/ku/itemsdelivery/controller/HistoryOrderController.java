@@ -13,10 +13,9 @@ import th.ku.itemsdelivery.service.ItemService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
-@RequestMapping("/items_delivery/history_order")
+@RequestMapping("/items-delivery/history_order")
 public class HistoryOrderController {
     private OrderRequestService orderRequestService;
     private ItemService itemService;

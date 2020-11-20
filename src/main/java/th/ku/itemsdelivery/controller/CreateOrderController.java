@@ -2,28 +2,22 @@ package th.ku.itemsdelivery.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import th.ku.itemsdelivery.model.Customer;
-import th.ku.itemsdelivery.model.ListItem;
-import th.ku.itemsdelivery.model.ListItemId;
 import th.ku.itemsdelivery.model.OrderRequest;
 import th.ku.itemsdelivery.service.CustomerService;
 import th.ku.itemsdelivery.service.ItemService;
-import th.ku.itemsdelivery.service.OrderRequestService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
+
 
 @Controller
-@RequestMapping("/items_delivery/create_order")
+@RequestMapping("/items-delivery/create_order")
 public class CreateOrderController {
     @Autowired
     private ItemService itemService;

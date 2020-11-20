@@ -2,24 +2,16 @@ package th.ku.itemsdelivery.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import th.ku.itemsdelivery.model.Customer;
-import th.ku.itemsdelivery.model.OrderRequest;
 import th.ku.itemsdelivery.service.CustomerService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 @Controller
-@RequestMapping("/items_delivery/create_customer")
+@RequestMapping("/items-delivery/create_customer")
 public class CreateCustomerController {
     private CustomerService customerService;
 
@@ -40,6 +32,6 @@ public class CreateCustomerController {
         else{
             customer = customerService.createCustomer(customer);
         }
-        return "redirect:/items_delivery/create_order/customer_id="+customer.getId();
+        return "redirect:/items-delivery/create_order/customer_id="+customer.getId();
     }
 }
