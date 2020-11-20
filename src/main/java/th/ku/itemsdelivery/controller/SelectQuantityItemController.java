@@ -45,9 +45,10 @@ public class SelectQuantityItemController {
         orderRequest = orderRequestService.createOrderRequest(orderRequest);
 
         int[] itemQty = Arrays.stream(request.getParameterValues("quantity")).mapToInt(Integer::parseInt).toArray();
+        //System.err.println(Arrays.toString(itemQty));
+        //System.err.println(Arrays.toString(request.getParameterValues("itemId")));
         int[] itemId = Arrays.stream(request.getParameterValues("itemId")).mapToInt(Integer::parseInt).toArray();
-//        System.err.println(Arrays.toString(itemQty));
-//        System.err.println(Arrays.toString(itemId));
+        //System.err.println(Arrays.toString(itemId));
 
         Map<Integer, Integer> mapIdQty = IntStream.range(0, itemId.length).boxed()
                 .collect(Collectors.toMap(i -> itemId[i], i -> itemQty[i]));
@@ -59,17 +60,17 @@ public class SelectQuantityItemController {
             }
         }
 
-        System.err.println(listItemIds.toString());
+        //System.err.println(listItemIds.toString());
 
         ArrayList<ListItem> listItems = new ArrayList<>();
         for (ListItemId listItemId : listItemIds)
             listItems.add(new ListItem(listItemId, mapIdQty.get(listItemId.getItemId())));
 
-        System.err.println(listItems.toString());
+        //System.err.println(listItems.toString());
 
         for(ListItem listItem : listItems)
             itemService.createListItem(listItem);
 
-        return "redirect:/items_delivery/home";
+        return "redirect:/items-delivery/home";
     }
 }
