@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2020 at 11:19 AM
+-- Generation Time: Nov 21, 2020 at 08:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
-  `firstname` text NOT NULL,
-  `lastname` text NOT NULL,
-  `phone_number` tinytext NOT NULL
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `phone_number` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -62,11 +62,11 @@ INSERT INTO `customer` (`id`, `firstname`, `lastname`, `phone_number`) VALUES
 
 CREATE TABLE `item` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `unit` tinytext NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `unit` varchar(20) NOT NULL,
   `description` text DEFAULT NULL,
-  `quantity` int(10) UNSIGNED DEFAULT 0,
-  `required` int(10) UNSIGNED DEFAULT 0
+  `quantity` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `required` int(10) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -77,13 +77,13 @@ INSERT INTO `item` (`id`, `name`, `unit`, `description`, `quantity`, `required`)
 (1, 'ROUTER (เราเตอร์) XIAOMI MI AIO T ROUTER AX3600 (29010) [XMI-DVB4251GL] - BLACK', 'ชิ้น', '7 Antennas\r\n1 AIoT Antenna 802.11b/g/n\r\nTransfer speeds 2402Mbps\r\nAutomatically discover new devices', 1, 1),
 (2, 'ROUTER (เราเตอร์) LINKSYS EA7500S DUAL BAND AC1900 GIGABIT PORT MU MIMO', 'ชิ้น', 'INTERFACE : IEEE 802.11 a/b/g/n/ac\r\nLAN : 4 X 10/100/1000 Mbps PORTS\r\nWAN : 1 X 10/100/1000 Mbps PORT', 7, 5),
 (3, 'ROUTER (เราเตอร์) LINKSYS ROUTER (EA8100) DUAL BAND AC2600 GIGABIT PORT MU MIMO', 'ชิ้น', 'INTERFACE : IEEE 802.11 b/g/a/ac/g\r\nLAN : 4 X 10/100/1000 Mbps PORTS\r\nWAN : 1 X 10/100/1000 Mbps PORT', 8, 4),
-(4, 'ROUTER (เราเตอร์) ASUS RT-AX82U DUAL BAND AX5400 WIFI6 RGB', 'ชิ้น', 'INTERFACE : IEEE 802.11 a/b/g/n/ac/ax\r\nLAN : 4 X 10/100/1000 Mbps PORTS\r\nWAN : 1 X 10/100/1000 Mbps PORTS\r\n1 x USB 3.2 GEN 1', 2, 0),
+(4, 'ROUTER (เราเตอร์) ASUS RT-AX82U DUAL BAND AX5400 WIFI6 RGB', 'ชิ้น', 'INTERFACE : IEEE 802.11 a/b/g/n/ac/ax\r\nLAN : 4 X 10/100/1000 Mbps PORTS\r\nWAN : 1 X 10/100/1000 Mbps PORTS\r\n1 x USB 3.2 GEN 1', 2, 1),
 (5, 'ROUTER (เราเตอร์) TENDA AC21 AC2100 DUAL BAND GIGABIT PORT', 'ชิ้น', 'INTERFACE : IEEE 802.11 n/g/b/ac\r\nLAN : 3 X 10/100/1000 Mbps PORTS\r\nWAN : 1 X 10/100/1000 Mbps PORT', 9, 0),
 (6, 'ROUTER (เราเตอร์) ASUS RT-AC59U V2 - AC1500 DUAL BAND GIGABIT WIFI ROUTER WITH MU-MIMO/AIMESH', 'ชิ้น', '• AiMesh Supported - Connect to other compatible ASUS routers to create a powerful and flexible whole-home Wi-Fi network\r\n• 600 Mbps (2.4GHz) and 867 Mbps (5GHz) for fast wireless performance.\r\n• 4 x Gigabit LAN port Speeds can be up to 10× faster than 100 Base-T Ethernet connections.\r\n• 1 x USB 2.0 port ASUS AiDisk offers network file sharing both locally and remotely.\r\n• Enjoy the ASUSWRT dashboard UI for easy setup and manage your router.\r\n• Improved coverage and multi-device performance with four external antennas.', 14, 3),
 (7, 'ROUTER (เราเตอร์) ASUS RT-AX3000 AX3000 DUAL BAND WI-FI 6 (802.11ax)', 'ชิ้น', 'Next-Gen Wi-Fi Standard - Supporting the latest Wi-Fi standard 802.11AX (Wi-Fi 6) and 160MHz bandwidth for better capacity and efficiency.\r\nUltra-fast Wi-Fi Speed – RT-AX3000 supports 160MHz bandwidth and 1024-QAM for dramatically faster wireless connections. With a total networking speed of about 3000Mbps — 574 Mbps on the 2.4GHz band and 2402 Mbps on the 5GHz band.\r\nIncrease Capacity and Efficiency – Supporting not only MU-MIMO but also OFDMA technique to efficiently allocate channels, communicate with multiple devices simultaneously\r\nCommercial-grade Security - lifetime free AiProtection, powered by Trend Micro™, blocks internet security threats for all your connected smart devices.\r\nBetter Partner with Mesh System - Compatible with ASUS AiMesh Wi Fi system for seamless whole-home coverage.', 6, 2),
 (8, 'LAN CABLE (สายแลน) POWERSYNC CAT.7 HIGHSPEED 5.0 METER (L7HB0020) (ULTRA-SLIM FLAT TYPE)', 'ชิ้น', 'LAN CABLE 5.0 METER', 18, 5),
 (9, 'LAN CABLE (สายแลน) POWERSYNC CAT.7 HIGHSPEED 3.0 METER (L7HB0020) (ULTRA-SLIM FLAT TYPE)', 'ชิ้น', 'LAN CABLE 3.0 METER', 9, 6),
-(10, 'LAN CABLE (สายแลน) POWERSYNC CAT.7 HIGHSPEED 2.0 METER (L7HB0020) (ULTRA-SLIM FLAT TYPE)', 'ชิ้น', 'LAN CABLE 2.0 METER', 17, 2),
+(10, 'LAN CABLE (สายแลน) POWERSYNC CAT.7 HIGHSPEED 2.0 METER (L7HB0020) (ULTRA-SLIM FLAT TYPE)', 'ชิ้น', 'LAN CABLE 2.0 METER', 17, 3),
 (11, 'LAN CABLE (สายแลน) LINK US-9106OUT-1 CAT6 UTP, PE OUTDOOR W/CROSS FILLER (DOUBLE) (100M) - BLACK)', 'ชิ้น', 'LENGH : 100 M', 5, 0),
 (12, 'LAN CABLE (สายแลน) LINK US-9106OUT CAT6 UTP, PE OUTDOOR W/CROSS FILLER (DOUBLE) (305M) - BLACK', 'ชิ้น', 'LENGH : 305 M', 0, 0),
 (13, 'LAN CABLE (สายแลน) LINK US-9116 CAT6 UTP ULTRA W/CROSS FILLER, 23AWG, CMR (305M) - WHITE', 'ชิ้น', 'LENGH : 305 M', 0, 0),
@@ -119,7 +119,7 @@ INSERT INTO `item` (`id`, `name`, `unit`, `description`, `quantity`, `required`)
 CREATE TABLE `item_export` (
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `export_quantity` int(10) UNSIGNED DEFAULT NULL,
+  `export_quantity` int(10) UNSIGNED NOT NULL,
   `export_datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -157,10 +157,10 @@ INSERT INTO `item_export` (`order_id`, `item_id`, `export_quantity`, `export_dat
 
 CREATE TABLE `item_import` (
   `id` int(11) NOT NULL,
-  `item_id` int(11) DEFAULT NULL,
-  `import_quantity` int(10) UNSIGNED DEFAULT NULL,
+  `item_id` int(11) NOT NULL,
+  `import_quantity` int(10) UNSIGNED NOT NULL,
   `import_datetime` timestamp NOT NULL DEFAULT current_timestamp(),
-  `import_remark` tinytext DEFAULT 'ARRIVAL'
+  `import_remark` varchar(15) NOT NULL DEFAULT 'ARRIVAL'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -207,7 +207,7 @@ INSERT INTO `item_import` (`id`, `item_id`, `import_quantity`, `import_datetime`
 CREATE TABLE `list_item` (
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `quantity` int(10) UNSIGNED DEFAULT NULL
+  `quantity` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -262,7 +262,9 @@ INSERT INTO `list_item` (`order_id`, `item_id`, `quantity`) VALUES
 (31, 15, 12),
 (31, 16, 4),
 (31, 32, 2),
-(31, 33, 1);
+(31, 33, 1),
+(32, 4, 1),
+(32, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -272,14 +274,14 @@ INSERT INTO `list_item` (`order_id`, `item_id`, `quantity`) VALUES
 
 CREATE TABLE `order_request` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `status` tinytext DEFAULT 'PENDING',
-  `address` text NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `status` varchar(15) NOT NULL DEFAULT 'PENDING',
+  `address` tinytext NOT NULL,
   `description` text DEFAULT NULL,
   `create_datetime` timestamp NOT NULL DEFAULT current_timestamp(),
-  `due_datetime` timestamp NULL DEFAULT NULL,
-  `last_update_datetime` timestamp NULL DEFAULT NULL,
-  `customer_id` int(11) DEFAULT NULL
+  `due_datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_update_datetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -313,7 +315,8 @@ INSERT INTO `order_request` (`id`, `name`, `status`, `address`, `description`, `
 (28, 'ติดตั้งอุปกรณ์ Mesh WiFi', 'PENDING', '25 ถนนสาทรใต้ แขวงทุ่งมหาเมฆ เขตสาทร กรุงเทพฯ 10120', 'สำนักงานใหญ่ อาคารกรุงเทพประกันภัย\r\nโทรศัพท์ 0 2285 8888\r\nโทรสาร 0 2610 2100\r\nเวลาทำการ จ.- ศ. เวลา 08.00 – 17.00 น.\r\n\r\nต้องการอุปกรณ์ TP Link', '2020-11-19 09:55:08', '2020-11-23 03:22:00', '2020-11-19 09:55:08', 14),
 (29, 'BROADBAND Advance PACKAGE 500/500', 'PENDING', '7,9 ซอยพระราม 2 (60/2) ถนนพระราม 2 แขวงแสมดำ เขตบางขุนเทียน กรุงเทพฯ 10150', 'ฟรีค่าแรกเข้า ฟรีค่าติดตั้ง\r\n\r\nโทร 0-2452-6103-6', '2020-11-19 10:06:39', '2020-11-25 04:30:16', '2020-11-19 10:06:39', 3),
 (30, 'Gigatex Fiber 200/200 Mbps', 'PENDING', '110/10 ซอย คณาทรัพย์ แขวง บางชัน เขต คลองสามวา กรุงเทพมหานคร 10510', 'อยู่ซอยแรก ข้างหน้าซอยมีร้านเหล็กดัด\r\nฟรีค่าติดตั้ง ฟรีกล่อง Inno Hybrid Plus', '2020-11-19 10:12:37', '2020-11-26 03:25:00', '2020-11-19 10:12:37', 2),
-(31, 'ติดตั้งอินเทอร์เน็ตสำนักงาน 1000/1000Mbps', 'PENDING', '355 ถนนบอนด์สตรีท ตำบลบางพูด อำเภอปากเกร็ด จังหวัดนนทบุรี 11120', 'สำนักงานใหญ่\r\nโทรศัพท์ : 0 2503 4116-21\r\nโทรสาร : 0 2503 4400\r\n\r\n', '2020-11-19 10:17:06', '2020-12-01 02:35:00', '2020-11-19 10:17:06', 5);
+(31, 'ติดตั้งอินเทอร์เน็ตสำนักงาน 1000/1000Mbps', 'PENDING', '355 ถนนบอนด์สตรีท ตำบลบางพูด อำเภอปากเกร็ด จังหวัดนนทบุรี 11120', 'สำนักงานใหญ่\r\nโทรศัพท์ : 0 2503 4116-21\r\nโทรสาร : 0 2503 4400\r\n\r\n', '2020-11-19 10:17:06', '2020-12-01 02:35:00', '2020-11-19 10:17:06', 5),
+(32, 'ติดตั้งอินเทอร์เน็ต 1000/1000Mbps', 'PENDING', '60/300 รามอินทรา 40 แยก 33', 'ฟรีค่าแรกเข้า และฟรีค่าติดตั้ง', '2020-11-21 07:59:00', '2020-11-28 08:25:00', '2020-11-21 07:59:00', 1);
 
 --
 -- Indexes for dumped tables
@@ -385,7 +388,7 @@ ALTER TABLE `item_import`
 -- AUTO_INCREMENT for table `order_request`
 --
 ALTER TABLE `order_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Constraints for dumped tables

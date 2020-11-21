@@ -32,7 +32,8 @@
         <div class="form-group">
             <label for="inputPhone">Phone Number</label>
             <input type="tel" class="form-control" id="inputPhone" name="phoneNumber" path="customer"
-                   pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]{9,}$"
+                   maxlength="20"
+                   pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$"
                    required>
         </div>
 
