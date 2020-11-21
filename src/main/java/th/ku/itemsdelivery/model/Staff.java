@@ -5,32 +5,35 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class OrderRequest {
+public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank
-    private String name;
-    private String status; // PENDING, PROGRESS, SUCCESS, CANCEL
+    private String username;
 
     @NotBlank
-    private String address;
+    private String password;
 
-    private String description;
-    private LocalDateTime createDatetime;
-    private LocalDateTime dueDatetime;
-    private LocalDateTime lastUpdateDatetime;
+    @NotBlank
+    private String firstname;
 
-    private int customerId;
-    private int staffId;
+    @NotBlank
+    private String lastname;
+
+    @NotBlank
+    private String role;
 }
