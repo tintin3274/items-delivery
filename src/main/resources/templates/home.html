@@ -63,11 +63,11 @@
             <td th:text="${order.status}" class="bold"> </td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
-            <td><a class="btn blue-gradient btn-home" role="button" th:href="@{/items-delivery/home/commit/{id}(id=${order.id})}"
+            <td><a class="btn btn-success btn-home" role="button" th:href="@{/items-delivery/home/commit/{id}(id=${order.id})}"
                    data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
             >Commit</a>
                 <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/history_order/info/{id}(id=${order.id})}" >Info</a>
-                <a class="btn peach-gradient btn-home" role="button" th:href="@{/items-delivery/home/cancel/{id}(id=${order.id})}"
+                <a class="btn btn-danger btn-home" role="button" th:href="@{/items-delivery/home/cancel/{id}(id=${order.id})}"
                    data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
                 >cancel</a>
             </td>
