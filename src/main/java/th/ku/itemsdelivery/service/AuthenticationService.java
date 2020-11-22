@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import th.ku.itemsdelivery.model.Staff;
 import th.ku.itemsdelivery.repository.StaffRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class AuthenticationService {
@@ -33,6 +35,18 @@ public class AuthenticationService {
         List<Staff> staffs = staffRepository.findByUsernameEquals(username);
         if(!staffs.isEmpty()) staffs.get(0);
         return null;
+    }
+
+    public Staff findStaffById(int id) {
+        try {
+            return staffRepository.findById(id).get();
+        } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (NoSuchElementException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 
     public String login(String username, String password) {
