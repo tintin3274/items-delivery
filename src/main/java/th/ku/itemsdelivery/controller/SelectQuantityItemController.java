@@ -42,6 +42,7 @@ public class SelectQuantityItemController {
     @PostMapping
     public String inputInt(HttpServletRequest request) {
         OrderRequest orderRequest = (OrderRequest) request.getSession().getAttribute("order");
+        orderRequest.setStaffId(1);
         orderRequest = orderRequestService.createOrderRequest(orderRequest);
 
         int[] itemQty = Arrays.stream(request.getParameterValues("quantity")).mapToInt(Integer::parseInt).toArray();

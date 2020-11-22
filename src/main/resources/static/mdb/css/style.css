@@ -1,3 +1,10 @@
+#cardLogin{
+    margin-top: 30px;
+    padding: 2px 16px;
+    height: 70vh;
+    margin-bottom: 30px;
+}
+
 
 .haveNewLine{
     white-space:pre-wrap;}

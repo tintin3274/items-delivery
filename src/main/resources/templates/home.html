@@ -40,6 +40,8 @@
             </th>
             <th class="th-sm">Action
             </th>
+            <th class="th-sm">Time left (Days)
+            </th>
         </tr>
         <tr>
             <th class="th-sm">ID
@@ -54,15 +56,15 @@
             </th>
             <th class="th-sm">Action
             </th>
-            <th class="th-sm">Time left
+            <th class="th-sm">Time left (Days)
             </th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="order : ${allOrders}">
-            <td th:text="${order.id}"></td>
+            <td th:text="${order.id}" style="text-align: center"></td>
             <td th:text="${order.name}"></td>
-            <td th:text="${order.status}" class="bold"> </td>
+            <td th:text="${order.status}" class="bold" > </td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}" th:data-order="${order.createDatetime}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}" th:data-order="${order.dueDatetime}"></td>
             <td><a class="btn btn-success btn-home" role="button" th:href="@{/items-delivery/home/commit/{id}(id=${order.id})}"
@@ -70,7 +72,7 @@
             >Commit</a>
                 <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/history_order/info/{id}(id=${order.id})}" >Info</a>
             </td>
-            <td></td>
+            <td th:text="${timeLeft.get(order.id)}" class="bold" style="text-align: center"></td>
         </tbody>
         <tfoot>
         <tr>
@@ -86,7 +88,7 @@
             </th>
             <th >Action
             </th>
-            <th >Time left
+            <th >Time left (Days)
             </th>
 
         </tr>
@@ -120,6 +122,15 @@
                 }],
                 rowCallback: function(row, data, index){
                     var ch
+                    if(data[6]< 31){
+                        $(row).find('td:eq(6)').css('color', 'red');
+                    }
+                    else if(data[6]< 91){
+                        $(row).find('td:eq(6)').css('color', 'orange');
+                    }
+                    else{
+                        $(row).find('td:eq(6)').css('color', 'green');
+                    }
                     if(data[2] == 'PENDING - NOT READY'){
                         $(row).find('td:eq(2)').css('color', 'red');
                         $(row).find('a:eq(0)').css('pointer-events', 'none');
@@ -132,7 +143,7 @@
                         $(row).find('td:eq(2)').css('color', 'blue');
                     }
 
-                },order: [ 0, "asc" ]
+                },order: [ 6, "asc" ]
 
             });
             $('.dataTables_length').addClass('bs-select');

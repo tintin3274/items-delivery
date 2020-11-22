@@ -13,19 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping
+@RequestMapping("/items-delivery/login")
 public class LoginController {
     @Autowired
     private AuthenticationService authenticationService;
 
     @GetMapping
     public String getLoginPage(HttpServletRequest request, HttpServletResponse response){
-        return "";
+        return "login";
     }
 
     @PostMapping
     public String login(Model model, HttpServletRequest request, @RequestParam String username, @RequestParam String password){
         authenticationService.login(username, password);
-        return  "";
+        return  "home";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        authenticationService.logout();
+        return "redirect:/items-delivery/login";
     }
 }
