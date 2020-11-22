@@ -40,7 +40,7 @@ public class HistoryOrderController {
         currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("SUCCESS"));
         model.addAttribute("allHistoryOrders",currentOrderslist);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
-        return "items-delivery/history_order";
+        return "history_order";
     }
 
     @GetMapping("/info/{id}")
@@ -53,5 +53,4 @@ public class HistoryOrderController {
         model.addAttribute("customerService",customerService);
         return "info_order";
     }
-
 }

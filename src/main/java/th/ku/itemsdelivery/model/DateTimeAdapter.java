@@ -1,5 +1,6 @@
 package th.ku.itemsdelivery.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,4 +17,12 @@ public class DateTimeAdapter {
         }
     }
 
+    public String changeFormatDate(LocalDateTime localDateTime) {
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            return localDateTime.format(dateTimeFormatter);
+        } catch (NullPointerException e) {
+            return "NULL";
+        }
+    }
 }
