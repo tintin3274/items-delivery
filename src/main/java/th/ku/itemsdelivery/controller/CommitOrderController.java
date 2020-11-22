@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.model.Staff;
 import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
@@ -35,6 +36,7 @@ public class CommitOrderController {
             return "redirect:/items-delivery/login";
         }
 
+        Staff staff = authenticationService.getStaffCurrentLogin();
         ArrayList<OrderRequest> currentOrdersList = new ArrayList<>();
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
         List<OrderRequest> pendingOrderList = orderRequestService.getOrderRequestStatusAll("PENDING");
@@ -50,8 +52,10 @@ public class CommitOrderController {
         currentOrdersList.addAll(pendingOrderList);
         currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
 
+        ArrayList<OrderRequest> showOrderList = new ArrayList<>();
         for(OrderRequest orderRequest : currentOrdersList){
-            timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
+            if(orderRequest.getStaffId() == staff.getId())
+                timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
         }
 
 //        for (int key : timeLeftMap.keySet()){

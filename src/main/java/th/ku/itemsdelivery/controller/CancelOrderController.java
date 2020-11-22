@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.model.Staff;
 import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
@@ -34,6 +35,7 @@ public class CancelOrderController {
         if(authenticationService.getStaffCurrentLogin() == null)
             return "redirect:/items-delivery/login";
 
+        Staff staff = authenticationService.getStaffCurrentLogin();
         ArrayList<OrderRequest> currentOrdersList = new ArrayList<>();
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
         List<OrderRequest> pendingOrderList = orderRequestService.getOrderRequestStatusAll("PENDING");
@@ -50,7 +52,8 @@ public class CancelOrderController {
         currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
 
         for(OrderRequest orderRequest : currentOrdersList){
-            timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
+            if(orderRequest.getStaffId() == staff.getId())
+                timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
         }
 
         model.addAttribute("allOrders",currentOrdersList);
