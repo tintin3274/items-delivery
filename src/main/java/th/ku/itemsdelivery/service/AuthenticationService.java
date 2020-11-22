@@ -16,9 +16,12 @@ public class AuthenticationService {
         this.staffRepository = staffRepository;
     }
 
-    public void register(Staff registerStaff) {
+    public String register(Staff registerStaff) {
+        if(findStaffByUsername(registerStaff.getUsername()) != null)
+            return "Register Fail";
         registerStaff.setPassword(hash(registerStaff.getPassword()));
         staffRepository.save(registerStaff);
+        return "Register Success";
     }
 
     private String hash(String password) {
