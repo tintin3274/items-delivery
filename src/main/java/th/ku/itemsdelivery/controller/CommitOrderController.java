@@ -28,27 +28,29 @@ public class CommitOrderController {
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
         List<OrderRequest> pendingOrderList = orderRequestService.getOrderRequestStatusAll("PENDING");
         HashMap<Integer, Boolean> checkOrder = orderRequestService.pendingCheckOrderRequestItemAll();
-        ArrayList<Long> timeLeftList = new ArrayList<>();
+        //ArrayList<Long> timeLeftList = new ArrayList<>();
+        HashMap<Integer, Long> timeLeftMap = new HashMap<>();
         for(OrderRequest orderRequest : pendingOrderList){
             if(checkOrder.get(orderRequest.getId()))
                 orderRequest.setStatus("PENDING - READY");
             else
                 orderRequest.setStatus("PENDING - NOT READY");
-
         }
-
-        for(OrderRequest orderRequest : pendingOrderList){
-            timeLeftList.add(Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
-            //System.err.println(orderRequest.getDueDatetime());
-        }
-
-        //System.err.println(LocalDateTime.now().toString());
-        //System.err.println(timeLeftList.toString()+"days");
 
         currentOrdersList.addAll(pendingOrderList);
         currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
+        
+        for(OrderRequest orderRequest : currentOrdersList){
+            timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
+        }
+
+//        for (int key : timeLeftMap.keySet()){
+//            System.err.println("This is order id" + key);
+//            System.err.println(timeLeftMap.get(key));
+//        }
+
         model.addAttribute("allOrders",currentOrdersList);
-        model.addAttribute("timeLeft", timeLeftList);
+        model.addAttribute("timeLeft", timeLeftMap);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
         return "home";
     }
