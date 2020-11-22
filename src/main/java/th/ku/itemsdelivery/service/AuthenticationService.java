@@ -33,7 +33,7 @@ public class AuthenticationService {
 
     private Staff findStaffByUsername(String username) {
         List<Staff> staffs = staffRepository.findStaffByUsernameEquals(username);
-        if(!staffs.isEmpty()) staffs.get(0);
+        if(!staffs.isEmpty()) return staffs.get(0);
         return null;
     }
 
