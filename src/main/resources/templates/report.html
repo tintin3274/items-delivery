@@ -15,15 +15,17 @@
         <span class="input-group-addon">
             <span class="fa fa-calendar" style="margin-right: 10px"></span>
         </span>
-        <input type="text" name="date" id="datepicker" placeholder="Enter Month and year" />
+        <input type="text" name="date" id="datepicker" placeholder="Enter Month and year" pattern="[0-9]{1,2}-[0-9]{4}" required/>
     </div>
     <input class="btn btn-light-green btn-search" type="submit" value="Search"></input>
 </form>
 
+    <h1 align="center" style="margin-top: 30px"><strong>รายงานการยกเลิกออเดอร์ประจำเดือน<span th:text="${month}"></span></strong></h1>
+    <h2  style="margin-top: 30px"><strong>ออก ณ วันที่ <span th:text="${dateTime.changeFormatDateSlash(currentDateTime)}"></span></strong></h2>
     <table id="selectedColumn" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th class="th-sm">Date
+            <th class="th-sm">Cancel Date
             </th>
             <th class="th-sm">Order Name
             </th>
@@ -35,13 +37,13 @@
         </thead>
         <tbody>
         <tr th:each="order : ${cancelOrders}">
-            <td th:text="${dateTime.changeFormatDate(order.createDatetime)}"></td>
+            <td th:text="${dateTime.changeFormatDate(order.lastUpdateDatetime)}"></td>
             <td th:text="${order.name}"></td>
             <td th:text="${customerService.getCustomer(order.customerId).firstname}+'   '+${customerService.getCustomer(order.customerId).lastname}"></td>
             <td th:text="${authenService.findStaffById(order.staffId).firstname}+'   '+${authenService.findStaffById(order.staffId).lastname}"></td>
         </tr>
         <tr>
-            <td colspan="4">yay</td>
+            <td colspan="4" class="bold">รวมทั้งหมด: <span th:text="${cancelOrders.size()}" class="bold"></span> Order</td>
         </tr>
         </tbody>
 

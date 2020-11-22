@@ -28,6 +28,7 @@ public class HistoryOrderController {
     private ItemService itemService;
     private CustomerService customerService;
 
+
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -64,6 +65,7 @@ public class HistoryOrderController {
 
     @GetMapping("/info/{id}")
     public String getInfoPage(@PathVariable int id, Model model){
+        model.addAttribute("authen",authenticationService);
         model.addAttribute("Order",orderRequestService.getOrderRequest(id));
         model.addAttribute("allItem",itemService.getListItemOrder(id));
         model.addAttribute("itemService",itemService);

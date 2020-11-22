@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-@RequestMapping("/items_delivery/quantity_item")
+@RequestMapping("/items-delivery/quantity_item")
 public class SelectQuantityItemController {
     @Autowired
     private OrderRequestService orderRequestService;

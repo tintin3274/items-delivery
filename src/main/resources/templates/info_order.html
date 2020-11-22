@@ -33,6 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#cus" role="tab" aria-controls="profile" aria-selected="false">Customer</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="staff-tab" data-toggle="tab" href="#stff" role="tab" aria-controls="profile" aria-selected="false">Staff</a>
+                </li>
             </ul>
 
             <div class="col-md-8" style="margin-top: 30px;">
@@ -116,6 +119,40 @@
                             </ul>
                         </div>
                             </div>
+                    <div class="tab-pane fade" id="stff" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="card"  style="margin-top: 30px;">
+                            <ul class="list-group list-group-flush">
+
+                                <li class="list-group-item"> <div class="row" >
+                                    <div class="col-md-6">
+                                        <label>ID Staff</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${authen.findStaffById(Order.staffId).id}"></p>
+                                    </div>
+                                </div>
+                                </li>
+                                <li class="list-group-item"> <div class="row" >
+                                    <div class="col-md-6">
+                                        <label>Firstname</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${authen.findStaffById(Order.staffId).firstname}"></p>
+                                    </div>
+                                </div>
+                                </li>
+                                <li class="list-group-item"> <div class="row" >
+                                    <div class="col-md-6">
+                                        <label>Lastname</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${authen.findStaffById(Order.staffId).lastname}"></p>
+                                    </div>
+                                </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>
