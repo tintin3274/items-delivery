@@ -1,11 +1,15 @@
 package th.ku.itemsdelivery.controller;
 
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.thymeleaf.TemplateEngine;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
 import th.ku.itemsdelivery.service.CustomerService;
@@ -36,7 +40,7 @@ public class HistoryOrderController {
         currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("SUCCESS"));
         model.addAttribute("allHistoryOrders",currentOrderslist);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
-        return "history_order";
+        return "items-delivery/history_order";
     }
 
     @GetMapping("/info/{id}")

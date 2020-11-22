@@ -45,7 +45,7 @@ public class CreateOrderController {
         //System.err.println(dueDateTime);
         LocalDateTime localDateTime = LocalDateTime.parse(dueDateTime, dateTimeFormatter);
         OrderRequest orderRequest = new OrderRequest(0, name.trim(), null, address.trim(), description,
-                null, localDateTime, null, customer.getId());
+                null, localDateTime, null, customer.getId(), 1);
 
         request.getSession().setAttribute("order", orderRequest);
         model.addAttribute("allItem",itemService.getItemAll());

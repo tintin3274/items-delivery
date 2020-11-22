@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}"
+      xmlns:th="https://www.thymeleaf.org">
+
+<div layout:fragment="content" class="container">
+    <h1 align="center" style="margin-top: 30px"><strong>Order List</strong></h1>
+    <div  id="fill">
+        <div class="row">
+            <div class="col-8">
+                <h5 style="margin-top: 40px;float: right" >Search by status</h5>
+            </div>
+            <div class="col-4">
+                <select id='filterText' class="filterText" style='display:inline-block' onchange='filterText()'>
+                    <option disabled selected>Select Status</option>
+                    <option value='pending'>Pending</option>
+                    <option value='"PENDING - READY"'>Pending - Ready</option>
+                    <option value='PENDING - NOT READY'>Pending -  Not Ready</option>
+                    <option value='progress'>Progress</option>
+                    <option value=''>All</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- Start your project here-->
+
+    <table id="selectedColumn" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
+        <thead>
+        <tr>
+            <th class="th-sm">ID
+            </th>
+            <th class="th-sm">Order Name
+            </th>
+            <th class="th-sm">Status
+            </th>
+            <th class="th-sm">Create-Date
+            </th>
+            <th class="th-sm">Due-Date
+            </th>
+            <th class="th-sm">Action
+            </th>
+        </tr>
+        <tr>
+            <th class="th-sm">ID
+            </th>
+            <th class="th-sm">Order Name
+            </th>
+            <th class="th-sm">Status
+            </th>
+            <th class="th-sm">Create-Date
+            </th>
+            <th class="th-sm">Due-Date
+            </th>
+            <th class="th-sm">Action
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${allOrders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.name}"></td>
+            <td th:text="${order.status}" class="bold"> </td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
+<!--            <td><a class="btn btn-success btn-home" role="button" th:href="@{/items-delivery/home/commit/{id}(id=${order.id})}"-->
+<!--                   data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"-->
+<!--            >Commit</a>-->
+                <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/history_order/info/{id}(id=${order.id})}" >Info</a>
+                <a class="btn btn-danger btn-home" role="button" th:href="@{/items-delivery/home/cancel/{id}(id=${order.id})}"
+                   data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
+                >cancel</a>
+            </td>
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>ID
+            </th>
+            <th>Order Name
+            </th>
+            <th>Status
+            </th>
+            <th>Create-Date
+            </th>
+            <th>Due-Date
+            </th>
+            <th class="th-sm">Action
+            </th>
+
+        </tr>
+        </tfoot>
+    </table>
+
+    <!-- End your project here-->
+
+    <script>
+        $(document).ready(function () {
+            $('#selectedColumn').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var search = $(`<input class="form-control form-control-sm" type="text" placeholder="Search">`)
+                            .appendTo($(column.header()).empty())
+                            .on('change input', function () {
+                                var val = $(this).val()
+
+                                column
+                                    .search(val ? val : '', true, false)
+                                    .draw();
+                            });
+
+                    });
+                },
+                "aaSorting": [],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 5
+                }],
+                rowCallback: function(row, data, index){
+                    var ch
+                    if(data[2] == 'PENDING - NOT READY'){
+                        $(row).find('td:eq(2)').css('color', 'red');
+                        $(row).find('a:eq(0)').css('pointer-events', 'none');
+                        $(row).find('a:eq(0)').css('opacity', '0.4');
+                    }
+                    else if(data[2] == 'PENDING - READY'){
+                        $(row).find('td:eq(2)').css('color', 'green');
+                    }
+                    else if(data[2] == 'PROGRESS'){
+                        $(row).find('td:eq(2)').css('color', 'blue');
+                    }
+
+                }
+
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+    <script>
+        $('#filterText').on('keyup change',function () {
+            var table= $('#selectedColumn').DataTable();
+            table.columns(2).search(this.value).draw();
+        });
+    </script>
+    <script src="/bootstrap.confirm.js"></script>
+
+</div>

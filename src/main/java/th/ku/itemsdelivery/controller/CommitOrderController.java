@@ -13,10 +13,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping({"/items-delivery/home", "/items-delivery"})
-public class HomeController {
+public class CommitOrderController {
     private OrderRequestService orderRequestService;
 
-    public HomeController(OrderRequestService orderRequestService) {
+    public CommitOrderController(OrderRequestService orderRequestService) {
         this.orderRequestService = orderRequestService;
     }
 
