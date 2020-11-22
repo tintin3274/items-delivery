@@ -52,6 +52,13 @@ public class HistoryOrderController {
         currentOrderslist.addAll(orderRequestService.getOrderRequestStatusAll("SUCCESS"));
         model.addAttribute("allHistoryOrders",currentOrderslist);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
+
+        String head ="fragments";
+        if(authenticationService.getStaffCurrentLogin().getRole().equals("INVENTORY MANAGER")){
+            head="fragmentInventory";
+        }
+        model.addAttribute("head",head);
+
         return "history_order";
     }
 

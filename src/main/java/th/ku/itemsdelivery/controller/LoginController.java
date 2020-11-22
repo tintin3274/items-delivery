@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import th.ku.itemsdelivery.model.Staff;
 import th.ku.itemsdelivery.service.AuthenticationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,10 +27,17 @@ public class LoginController {
     @PostMapping
     public String login(Model model, HttpServletRequest request, @RequestParam String username, @RequestParam String password){
         authenticationService.login(username.trim(), password.trim());
-        if(authenticationService.getStaffCurrentLogin() == null)
+        Staff staff=authenticationService.getStaffCurrentLogin();
+        if(staff == null)
             return "login";
-        else
+        else if(staff.getRole().equals("INSTALLER")){
             return "redirect:/items-delivery/home";
+        }
+        else if(staff.getRole().equals("INVENTORY MANAGER")){
+            return "redirect:/items-delivery/import_item";
+        }
+        else {authenticationService.logout(); return "login";}
+
     }
 
     @GetMapping("/logout")
