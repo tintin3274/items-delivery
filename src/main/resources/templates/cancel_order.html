@@ -4,7 +4,7 @@
       xmlns:th="https://www.thymeleaf.org">
 
 <div layout:fragment="content" class="container">
-    <h1 align="center" style="margin-top: 30px"><strong>Order List</strong></h1>
+    <h1 align="center" style="margin-top: 30px"><strong>Order List For Cancel</strong></h1>
     <div  id="fill">
         <div class="row">
             <div class="col-8">
@@ -61,15 +61,13 @@
             <td th:text="${order.id}"></td>
             <td th:text="${order.name}"></td>
             <td th:text="${order.status}" class="bold"> </td>
-            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
-            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
-<!--            <td><a class="btn btn-success btn-home" role="button" th:href="@{/items-delivery/home/commit/{id}(id=${order.id})}"-->
-<!--                   data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"-->
-<!--            >Commit</a>-->
-                <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/history_order/info/{id}(id=${order.id})}" >Info</a>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}" th:data-order="${order.createDatetime}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}" th:data-order="${order.dueDatetime}"></td>
+            <td>
                 <a class="btn btn-danger btn-home" role="button" th:href="@{/items-delivery/home/cancel/{id}(id=${order.id})}"
                    data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
                 >cancel</a>
+                <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/history_order/info/{id}(id=${order.id})}" >Info</a>
             </td>
         </tbody>
         <tfoot>
@@ -96,6 +94,7 @@
     <script>
         $(document).ready(function () {
             $('#selectedColumn').DataTable({
+
                 initComplete: function () {
                     this.api().columns().every(function () {
                         var column = this;
@@ -120,8 +119,6 @@
                     var ch
                     if(data[2] == 'PENDING - NOT READY'){
                         $(row).find('td:eq(2)').css('color', 'red');
-                        $(row).find('a:eq(0)').css('pointer-events', 'none');
-                        $(row).find('a:eq(0)').css('opacity', '0.4');
                     }
                     else if(data[2] == 'PENDING - READY'){
                         $(row).find('td:eq(2)').css('color', 'green');
@@ -130,8 +127,7 @@
                         $(row).find('td:eq(2)').css('color', 'blue');
                     }
 
-                }
-
+                },order: [ 0, "asc" ]
             });
             $('.dataTables_length').addClass('bs-select');
         });
@@ -145,3 +141,4 @@
     <script src="/bootstrap.confirm.js"></script>
 
 </div>
+

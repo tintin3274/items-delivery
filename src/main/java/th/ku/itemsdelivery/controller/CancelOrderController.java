@@ -39,7 +39,7 @@ public class CancelOrderController {
         currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
         model.addAttribute("allOrders",currentOrdersList);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
-        return "commit_order";
+        return "cancel_order";
     }
 
     @GetMapping("/cancel/{id}")

@@ -4,7 +4,7 @@
       xmlns:th="https://www.thymeleaf.org">
 
 <div layout:fragment="content" class="container">
-    <h1 align="center" style="margin-top: 30px"><strong>Order List</strong></h1>
+    <h1 align="center" style="margin-top: 30px"><strong>Order List For Commit</strong></h1>
     <div  id="fill">
         <div class="row">
             <div class="col-8">
@@ -54,6 +54,8 @@
             </th>
             <th class="th-sm">Action
             </th>
+            <th class="th-sm">Time left
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -61,16 +63,14 @@
             <td th:text="${order.id}"></td>
             <td th:text="${order.name}"></td>
             <td th:text="${order.status}" class="bold"> </td>
-            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}"></td>
-            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.createDatetime)}" th:data-order="${order.createDatetime}"></td>
+            <td th:text="${dateTimeAdapter.changeFormatDateTime(order.dueDatetime)}" th:data-order="${order.dueDatetime}"></td>
             <td><a class="btn btn-success btn-home" role="button" th:href="@{/items-delivery/home/commit/{id}(id=${order.id})}"
                    data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
             >Commit</a>
                 <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/history_order/info/{id}(id=${order.id})}" >Info</a>
-                <a class="btn btn-danger btn-home" role="button" th:href="@{/items-delivery/home/cancel/{id}(id=${order.id})}"
-                   data-toggle="confirm" data-btn-confirm="YES" data-btn-cancel="NO"
-                >cancel</a>
             </td>
+            <td></td>
         </tbody>
         <tfoot>
         <tr>
@@ -84,7 +84,9 @@
             </th>
             <th>Due-Date
             </th>
-            <th class="th-sm">Action
+            <th >Action
+            </th>
+            <th >Time left
             </th>
 
         </tr>
@@ -130,7 +132,7 @@
                         $(row).find('td:eq(2)').css('color', 'blue');
                     }
 
-                }
+                },order: [ 0, "asc" ]
 
             });
             $('.dataTables_length').addClass('bs-select');
