@@ -54,8 +54,10 @@ public class CommitOrderController {
 
         ArrayList<OrderRequest> showOrderList = new ArrayList<>();
         for(OrderRequest orderRequest : currentOrdersList){
-            if(orderRequest.getStaffId() == staff.getId())
+            if(orderRequest.getStaffId() == staff.getId()){
+                showOrderList.add(orderRequest);
                 timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
+            }
         }
 
 //        for (int key : timeLeftMap.keySet()){
@@ -63,7 +65,7 @@ public class CommitOrderController {
 //            System.err.println(timeLeftMap.get(key));
 //        }
 
-        model.addAttribute("allOrders",currentOrdersList);
+        model.addAttribute("allOrders",showOrderList);
         model.addAttribute("timeLeft", timeLeftMap);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
         return "home";
