@@ -25,8 +25,11 @@ public class LoginController {
 
     @PostMapping
     public String login(Model model, HttpServletRequest request, @RequestParam String username, @RequestParam String password){
-        authenticationService.login(username, password);
-        return  "home";
+        authenticationService.login(username.trim(), password.trim());
+        if(authenticationService.getStaffCurrentLogin() == null)
+            return "login";
+        else
+            return "redirect:/items-delivery/home";
     }
 
     @GetMapping("/logout")

@@ -2,6 +2,7 @@ package th.ku.itemsdelivery.controller;
 
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.TemplateEngine;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.model.Staff;
+import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.CustomerService;
 import th.ku.itemsdelivery.service.ItemService;
 import th.ku.itemsdelivery.service.OrderRequestService;
@@ -25,6 +28,9 @@ public class HistoryOrderController {
     private ItemService itemService;
     private CustomerService customerService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     public HistoryOrderController(OrderRequestService orderRequestService, ItemService itemService, CustomerService customerService) {
         this.orderRequestService = orderRequestService;
         this.itemService = itemService;
@@ -33,6 +39,12 @@ public class HistoryOrderController {
 
     @GetMapping
     public String getHistoryPage(Model model){
+        if(authenticationService.getStaffCurrentLogin() == null)
+            return "redirect:/items-delivery/login";
+
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.addDialect(new LayoutDialect());
+
         ArrayList<OrderRequest> currentOrderslist=new ArrayList<>();
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
 
@@ -45,7 +57,6 @@ public class HistoryOrderController {
 
     @GetMapping("/info/{id}")
     public String getInfoPage(@PathVariable int id, Model model){
-
         model.addAttribute("Order",orderRequestService.getOrderRequest(id));
         model.addAttribute("allItem",itemService.getListItemOrder(id));
         model.addAttribute("itemService",itemService);

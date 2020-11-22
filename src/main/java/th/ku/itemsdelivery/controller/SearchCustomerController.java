@@ -1,5 +1,6 @@
 package th.ku.itemsdelivery.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import th.ku.itemsdelivery.model.Customer;
+import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.CustomerService;
 
 import java.util.ArrayList;
@@ -16,12 +18,18 @@ import java.util.ArrayList;
 public class SearchCustomerController {
     private CustomerService customerService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     public SearchCustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
     @GetMapping
     public String getPage (Model model){
+        if(authenticationService.getStaffCurrentLogin() == null)
+            return "redirect:/items-delivery/login";
+
         model.addAttribute("selectedCustomer",customerService.getCustomerAll());
         return "search_customer";
     }
@@ -45,5 +53,4 @@ public class SearchCustomerController {
         System.err.println(customers);
         return "search_customer";
     }
-
 }

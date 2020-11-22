@@ -1,5 +1,6 @@
 package th.ku.itemsdelivery.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
 import java.time.Duration;
@@ -20,12 +22,18 @@ import java.util.List;
 public class CancelOrderController {
     private OrderRequestService orderRequestService;
 
+    @Autowired
+    public AuthenticationService authenticationService;
+
     public CancelOrderController(OrderRequestService orderRequestService) {
         this.orderRequestService = orderRequestService;
     }
 
     @GetMapping
     public String getHomePage(Model model){
+        if(authenticationService.getStaffCurrentLogin() == null)
+            return "redirect:/items-delivery/login";
+
         ArrayList<OrderRequest> currentOrdersList = new ArrayList<>();
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
         List<OrderRequest> pendingOrderList = orderRequestService.getOrderRequestStatusAll("PENDING");
@@ -53,6 +61,9 @@ public class CancelOrderController {
 
     @GetMapping("/cancel/{id}")
     public String cancelOrder(@PathVariable int id){
+        if(authenticationService.getStaffCurrentLogin() == null)
+            return "redirect:/items-delivery/login";
+
         orderRequestService.cancelOrderRequest(id);
         return "redirect:/items-delivery/cancel_order";
     }

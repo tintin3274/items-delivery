@@ -54,8 +54,8 @@ public class ItemService {
         return itemImport;
     }
 
-    public ItemImport createItemImport(int itemId, int quantity) {
-        String url = "http://localhost:8090/api/items-delivery/item_import/item="+itemId+"/add="+quantity;
+    public ItemImport createItemImport(int itemId, int quantity, int staffId) {
+        String url = "http://localhost:8090/api/items-delivery/item_import/item="+itemId+"/add="+quantity+"/staff="+staffId;
         ResponseEntity<ItemImport> responseEntity = restTemplate.getForEntity(url, ItemImport.class);
         ItemImport itemImport = responseEntity.getBody();
         return itemImport;

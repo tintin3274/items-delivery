@@ -6,5 +6,5 @@ import th.ku.itemsdelivery.model.Staff;
 import java.util.List;
 
 public interface StaffRepository extends JpaRepository<Staff, Integer> {
-    List<Staff> findByUsernameEquals(String username);
+    List<Staff> findStaffByUsernameEquals(String username);
 }

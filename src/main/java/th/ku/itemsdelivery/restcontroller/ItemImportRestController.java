@@ -40,8 +40,8 @@ public class ItemImportRestController {
         }
     }
 
-    @GetMapping("/item={itemId}/add={quantity}")
-    public ItemImport addQuantity(@PathVariable int itemId, @PathVariable int quantity) {
+    @GetMapping("/item={itemId}/add={quantity}/staff={staffId}")
+    public ItemImport addQuantity(@PathVariable int itemId, @PathVariable int quantity, @PathVariable int staffId) {
         try {
             if(quantity < 1) throw new IllegalArgumentException("Quantity should > 1");
             ItemImport itemImport = new ItemImport();
@@ -49,6 +49,7 @@ public class ItemImportRestController {
             itemImport.setImportQuantity(quantity);
             itemImport.setImportRemark("ARRIVAL");
             itemImport.setImportDatetime(LocalDateTime.now());
+            itemImport.setStaffId(staffId);
             itemImportRepository.saveAndFlush(itemImport);
 
             Item item = itemRepository.findById(itemId).get();

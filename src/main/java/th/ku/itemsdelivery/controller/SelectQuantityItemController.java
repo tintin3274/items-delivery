@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import th.ku.itemsdelivery.model.ListItem;
 import th.ku.itemsdelivery.model.ListItemId;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.model.Staff;
+import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.ItemService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
@@ -27,6 +29,9 @@ public class SelectQuantityItemController {
     @Autowired
     private OrderRequestService orderRequestService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     private ItemService itemService;
 
     public SelectQuantityItemController(ItemService itemService) {
@@ -35,6 +40,9 @@ public class SelectQuantityItemController {
 
     @GetMapping
     public String getQuantityItemPage(Model model){
+        if(authenticationService.getStaffCurrentLogin() == null)
+            return "redirect:/items-delivery/login";
+
         model.addAttribute("allItem",itemService.getItemAll());
         return "quantity_item";
     }
@@ -42,7 +50,8 @@ public class SelectQuantityItemController {
     @PostMapping
     public String inputInt(HttpServletRequest request) {
         OrderRequest orderRequest = (OrderRequest) request.getSession().getAttribute("order");
-        orderRequest.setStaffId(1);
+        Staff staff = authenticationService.getStaffCurrentLogin();
+        orderRequest.setStaffId(staff.getId());
         orderRequest = orderRequestService.createOrderRequest(orderRequest);
 
         int[] itemQty = Arrays.stream(request.getParameterValues("quantity")).mapToInt(Integer::parseInt).toArray();
@@ -50,7 +59,6 @@ public class SelectQuantityItemController {
         //System.err.println(Arrays.toString(request.getParameterValues("itemId")));
         int[] itemId = Arrays.stream(request.getParameterValues("itemId")).mapToInt(Integer::parseInt).toArray();
         //System.err.println(Arrays.toString(itemId));
-
         Map<Integer, Integer> mapIdQty = IntStream.range(0, itemId.length).boxed()
                 .collect(Collectors.toMap(i -> itemId[i], i -> itemQty[i]));
 
@@ -60,13 +68,10 @@ public class SelectQuantityItemController {
                 listItemIds.add(new ListItemId(orderRequest.getId(), id));
             }
         }
-
         //System.err.println(listItemIds.toString());
-
         ArrayList<ListItem> listItems = new ArrayList<>();
         for (ListItemId listItemId : listItemIds)
             listItems.add(new ListItem(listItemId, mapIdQty.get(listItemId.getItemId())));
-
         //System.err.println(listItems.toString());
 
         for(ListItem listItem : listItems)
