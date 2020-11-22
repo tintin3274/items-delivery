@@ -7,6 +7,8 @@ import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,16 +28,27 @@ public class CommitOrderController {
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
         List<OrderRequest> pendingOrderList = orderRequestService.getOrderRequestStatusAll("PENDING");
         HashMap<Integer, Boolean> checkOrder = orderRequestService.pendingCheckOrderRequestItemAll();
+        ArrayList<Long> timeLeftList = new ArrayList<>();
         for(OrderRequest orderRequest : pendingOrderList){
             if(checkOrder.get(orderRequest.getId()))
                 orderRequest.setStatus("PENDING - READY");
             else
                 orderRequest.setStatus("PENDING - NOT READY");
+
         }
+
+        for(OrderRequest orderRequest : pendingOrderList){
+            timeLeftList.add(Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
+            //System.err.println(orderRequest.getDueDatetime());
+        }
+
+        //System.err.println(LocalDateTime.now().toString());
+        //System.err.println(timeLeftList.toString()+"days");
 
         currentOrdersList.addAll(pendingOrderList);
         currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
         model.addAttribute("allOrders",currentOrdersList);
+        model.addAttribute("timeLeft", timeLeftList);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
         return "home";
     }
@@ -56,4 +69,6 @@ public class CommitOrderController {
 
         return "redirect:/items-delivery/home";
     }
+
+
 }
