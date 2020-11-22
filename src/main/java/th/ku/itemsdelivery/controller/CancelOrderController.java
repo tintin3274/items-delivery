@@ -51,12 +51,15 @@ public class CancelOrderController {
         currentOrdersList.addAll(pendingOrderList);
         currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
 
+        ArrayList<OrderRequest> showOrderList = new ArrayList<>();
         for(OrderRequest orderRequest : currentOrdersList){
-            if(orderRequest.getStaffId() == staff.getId())
+            if(orderRequest.getStaffId() == staff.getId()){
+                showOrderList.add(orderRequest);
                 timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
+            }
         }
 
-        model.addAttribute("allOrders",currentOrdersList);
+        model.addAttribute("allOrders",showOrderList);
         model.addAttribute("timeLeft", timeLeftMap);
         model.addAttribute("dateTimeAdapter",dateTimeAdapter);
         return "cancel_order";
