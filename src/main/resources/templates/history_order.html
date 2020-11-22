@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{fragments/main_layout}"
+      layout:decorate="~{${head}+'/main_layout'}"
       xmlns:th="https://www.thymeleaf.org">
-
 
 
 <div class="container" layout:fragment="content">
@@ -72,8 +71,6 @@
         </tr>
         </tfoot>
     </table>
-
-    <div th:include="~{fragmentInventory/main_layout}">
 
     <script>
         $(document).ready(function () {

@@ -24,7 +24,14 @@ public class InstockItemsController {
         if(authenticationService.getStaffCurrentLogin() == null)
             return "redirect:/items-delivery/login";
 
+        String head ="fragments";
+        if(authenticationService.getStaffCurrentLogin().getRole().equals("INVENTORY MANAGER")){
+            head="fragmentInventory";
+        }
+        model.addAttribute("head",head);
         model.addAttribute("allItems",itemService.getItemAll());
+
+
         return "instock_items";
     }
 }
