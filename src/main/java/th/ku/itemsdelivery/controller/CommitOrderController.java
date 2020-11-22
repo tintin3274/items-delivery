@@ -1,10 +1,13 @@
 package th.ku.itemsdelivery.controller;
 
+import lombok.var;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ku.itemsdelivery.model.DateTimeAdapter;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.OrderRequestService;
 
 import java.time.Duration;
@@ -18,17 +21,24 @@ import java.util.List;
 public class CommitOrderController {
     private OrderRequestService orderRequestService;
 
-    public CommitOrderController(OrderRequestService orderRequestService) {
+    private AuthenticationService authenticationService;
+
+    public CommitOrderController(OrderRequestService orderRequestService, AuthenticationService authenticationService) {
         this.orderRequestService = orderRequestService;
+        this.authenticationService = authenticationService;
     }
 
     @GetMapping
     public String getHomePage(Model model){
-        ArrayList<OrderRequest> currentOrdersList=new ArrayList<>();
+        if (authenticationService.getStaffCurrentLogin() == null){
+            //System.err.println(authenticationService.getStaffCurrentLogin().toString());
+            return "redirect:/items-delivery/login";
+        }
+
+        ArrayList<OrderRequest> currentOrdersList = new ArrayList<>();
         DateTimeAdapter dateTimeAdapter =new DateTimeAdapter();
         List<OrderRequest> pendingOrderList = orderRequestService.getOrderRequestStatusAll("PENDING");
         HashMap<Integer, Boolean> checkOrder = orderRequestService.pendingCheckOrderRequestItemAll();
-        //ArrayList<Long> timeLeftList = new ArrayList<>();
         HashMap<Integer, Long> timeLeftMap = new HashMap<>();
         for(OrderRequest orderRequest : pendingOrderList){
             if(checkOrder.get(orderRequest.getId()))
@@ -39,7 +49,7 @@ public class CommitOrderController {
 
         currentOrdersList.addAll(pendingOrderList);
         currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
-        
+
         for(OrderRequest orderRequest : currentOrdersList){
             timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
         }

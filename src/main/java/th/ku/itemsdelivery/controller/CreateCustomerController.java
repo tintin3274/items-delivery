@@ -1,5 +1,6 @@
 package th.ku.itemsdelivery.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import th.ku.itemsdelivery.model.Customer;
+import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.CustomerService;
 
 
@@ -15,11 +17,19 @@ import th.ku.itemsdelivery.service.CustomerService;
 public class CreateCustomerController {
     private CustomerService customerService;
 
+    @Autowired
+    public AuthenticationService authenticationService;
+
     public CreateCustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
     @GetMapping
-    public String getCreatePage(){return "create_customer";}
+    public String getCreatePage(){
+        if(authenticationService.getStaffCurrentLogin() == null)
+            return "redirect:/items-delivery/login";
+
+        return "create_customer";
+    }
 
     @PostMapping
     public String createCustomer(@RequestParam String firstname, @RequestParam String lastname,

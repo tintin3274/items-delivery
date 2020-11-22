@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import th.ku.itemsdelivery.model.Customer;
 import th.ku.itemsdelivery.model.OrderRequest;
+import th.ku.itemsdelivery.model.Staff;
+import th.ku.itemsdelivery.service.AuthenticationService;
 import th.ku.itemsdelivery.service.CustomerService;
 import th.ku.itemsdelivery.service.ItemService;
 
@@ -25,8 +27,14 @@ public class CreateOrderController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     @GetMapping("/customer_id={id}")
     public String getCreatePage(@PathVariable int id, ModelMap model, HttpServletRequest request){
+        if(authenticationService.getStaffCurrentLogin() == null)
+            return "redirect:/items-delivery/login";
+
         Customer customer = customerService.getCustomer(id);
         //model.addAttribute("customer", customer);
         request.getSession().setAttribute("customer", customer);
@@ -39,13 +47,14 @@ public class CreateOrderController {
                               @RequestParam String description, ModelMap model, RedirectAttributes redirectAttributes,
                               HttpServletResponse response, HttpServletRequest request) {
 
+        Staff staff = authenticationService.getStaffCurrentLogin();
         Customer customer = (Customer) request.getSession().getAttribute("customer");
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         //System.err.println(dueDateTime);
         LocalDateTime localDateTime = LocalDateTime.parse(dueDateTime, dateTimeFormatter);
         OrderRequest orderRequest = new OrderRequest(0, name.trim(), null, address.trim(), description,
-                null, localDateTime, null, customer.getId(), 1);
+                null, localDateTime, null, customer.getId(), staff.getId());
 
         request.getSession().setAttribute("order", orderRequest);
         model.addAttribute("allItem",itemService.getItemAll());
