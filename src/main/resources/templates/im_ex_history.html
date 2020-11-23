@@ -68,7 +68,7 @@
                     <td th:text="${import.itemId}"></td>
                     <td th:text="${itemService.getItem(import.itemId).name}"></td>
                     <td th:text="${import.importQuantity}" > </td>
-                    <td th:text="${dateTimeAdapter.changeFormatDateTime(import.importDatetime)}" > </td>
+                    <td th:text="${dateTimeAdapter.changeFormatDateTime(import.importDatetime)}" th:data-order="${import.importDatetime}"> </td>
                     <td th:text="${import.importRemark}"></td>
                 </tbody>
                 <tfoot>
@@ -127,7 +127,7 @@
                     <td th:text="${export.itemExportId.itemId}"></td>
                     <td th:text="${itemService.getItem(export.itemExportId.itemId).name}" > </td>
                     <td th:text="${export.exportQuantity}"></td>
-                    <td th:text="${dateTimeAdapter.changeFormatDateTime(export.exportDatetime)}"> </td>
+                    <td th:text="${dateTimeAdapter.changeFormatDateTime(export.exportDatetime)}" th:data-order="${export.exportDatetime}"> </td>
                 </tbody>
                 <tfoot>
                 <tr>
@@ -170,7 +170,7 @@
                 "aaSorting": [],
                 columnDefs: [{
                     orderable: false,
-                }],
+                }],order: [ 3, "desc" ]
             });
             $('.dataTables_length').addClass('bs-select');
         });
@@ -196,7 +196,7 @@
                 "aaSorting": [],
                 columnDefs: [{
                     orderable: false,
-                }],
+                }],order: [ 4, "desc" ]
             });
             $('.dataTables_length').addClass('bs-select');
         });

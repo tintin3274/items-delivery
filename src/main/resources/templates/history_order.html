@@ -50,7 +50,7 @@
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.createDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.dueDatetime)}"></td>
             <td th:text="${dateTimeAdapter.changeFormatDateTime(historyOrder.lastUpdateDatetime)}"></td>
-            <td > <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/history_order/info/{id}(id=${historyOrder.id})}" >Info</a></td>
+            <td > <a class="btn btn-info btn-home" role="button" th:href="@{/items-delivery/history_order/info/{id}(id=${historyOrder.id})}" >Info</a></td>
         </tr>
         </tbody>
         <tfoot>
@@ -101,7 +101,7 @@
                     } else if (data[2] == 'SUCCESS') {
                         $(row).find('td:eq(2)').css('color', 'green');
                     }
-                }
+                },order: [ 5, "desc" ]
             });
             $('.dataTables_length').addClass('bs-select');
         });

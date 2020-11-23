@@ -35,7 +35,7 @@
 
         <div class="row">
             <div class="col-md-6 offset-md-6">
-                <button type="submit" class="btn blue-gradient w-50" style="float: right;">Next</button>
+                <button type="submit" class="btn btn-success w-50" style="float: right;">Submit</button>
             </div>
         </div>
     </form>
@@ -47,7 +47,8 @@
                 singleDatePicker: true,
                 timePicker24Hour: true,
                 timePickerSeconds: true,
-                minDate: moment().startOf('minute').add(30, 'minute'),
+                minDate: moment().startOf('minute').add(12, 'hour'),
+                maxDate: moment().startOf('day').add(6, 'month'),
                 locale: {
                     format: 'YYYY-MM-DD HH:mm:ss'
                 }
@@ -56,9 +57,10 @@
     </script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="/daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="/daterangepicker/daterangepicker.js"></script>
+    <link rel="stylesheet" href="/daterangepicker/daterangepicker.css">
+
 
 
 
