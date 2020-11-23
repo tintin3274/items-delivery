@@ -37,12 +37,16 @@ public class HomeController {
                 orderRequest.setStatus("PENDING - NOT READY");
         }
 
-
-
         currentOrdersList.addAll(pendingOrderList);
         currentOrdersList.addAll(orderRequestService.getOrderRequestStatusAll("PROGRESS"));
         for(OrderRequest orderRequest : currentOrdersList){
-            timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
+            try {
+                timeLeftMap.put(orderRequest.getId(), Duration.between(LocalDateTime.now(), orderRequest.getDueDatetime()).toDays());
+            }
+            catch (NullPointerException e) {
+                System.err.println(e.getMessage());
+                timeLeftMap.put(orderRequest.getId(), Long.valueOf(0));
+            }
         }
 
         model.addAttribute("timeLeft", timeLeftMap);
