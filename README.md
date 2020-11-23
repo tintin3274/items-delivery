@@ -1,4 +1,7 @@
 # Items Delivery System Project
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/27423b640c6246238e045f7b3c402d04)](https://app.codacy.com/gh/tintin3274/items-delivery?utm_source=github.com&utm_medium=referral&utm_content=tintin3274/items-delivery&utm_campaign=Badge_Grade)
+
 Items Delivery System Project is Project of Kasetsart University course 01418471 Introduction to Software Engineering First Semester 2020.
 
 ## Members 
