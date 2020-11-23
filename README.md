@@ -34,3 +34,11 @@ Items Delivery System is web application. It is a system designed to assist in t
  - Spring Boot 
  - XAMPP MySQL
  
+ 
+## Who do I talk to?
+Jittin Jindanoraseth (Tin)  
+[Facebook](https://www.facebook.com/tintin3274/)  
+Email:
+- tintin3274@hotmail.co.th
+- jittin.ji@ku.th
+ 
