@@ -29,7 +29,7 @@
                 <label for="inputTel">Tel.</label>
                 <input type="text" class="form-control" id="inputTel" name="Tel">
             </div>
-            <input class="btn purple-gradient btn-search"  type="submit" style="height: 40px"></input>
+            <input class="btn btn-success btn-search"  type="submit" style="height: 40px"></input>
         </div>
         <!-- Grid row -->
     </form>
@@ -40,7 +40,7 @@
                 <label for="inputId">ID</label>
                 <input type="number" class="form-control" id="inputId"  required name="Id">
             </div>
-            <input class="btn purple-gradient btn-search" type="submit" style="height: 40px"></input>
+            <input class="btn btn-success btn-search" type="submit" style="height: 40px"></input>
         </div>
     </form>
 
@@ -65,7 +65,7 @@
             <td th:text="${customer.firstname}"></td>
             <td th:text="${customer.lastname}" ></td>
             <td th:text="${customer.phoneNumber}"></td>
-            <td > <a class="btn purple-gradient btn-home" role="button" th:href="@{/items-delivery/create_order/customer_id={id}(id=${customer.id})}">Select</a></td>
+            <td > <a class="btn btn-success btn-home" role="button" th:href="@{/items-delivery/create_order/customer_id={id}(id=${customer.id})}">Select</a></td>
         </tr>
         </tbody>
         <tfoot>
@@ -89,7 +89,7 @@
             $('#dtBasicExample').DataTable({
                 "columnDefs": [
                     { "width": "10%", "targets": 4}
-                ]
+                ],order: [ 0, "asc" ]
             });
             $('.dataTables_length').addClass('bs-select');
         });
