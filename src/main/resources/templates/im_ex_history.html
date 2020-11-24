@@ -49,6 +49,8 @@
                     </th>
                     <th class="th-sm">Remark
                     </th>
+                    <th class="th-sm">Staff Name
+                    </th>
                 </tr>
                 <tr>
                     <th class="th-sm">Item ID
@@ -61,6 +63,8 @@
                     </th>
                     <th class="th-sm">Remark
                     </th>
+                    <th class="th-sm">Staff Name
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -70,6 +74,7 @@
                     <td th:text="${import.importQuantity}" > </td>
                     <td th:text="${dateTimeAdapter.changeFormatDateTime(import.importDatetime)}" > </td>
                     <td th:text="${import.importRemark}"></td>
+                    <td th:text="${authen.findStaffById(import.staffId).firstname}+'   '+${authen.findStaffById(import.staffId).lastname}"></td>
                 </tbody>
                 <tfoot>
                 <tr>
@@ -82,6 +87,8 @@
                     <th>Import Date Time
                     </th>
                     <th>Remark
+                    </th>
+                    <th >Staff Name
                     </th>
 
                 </tr>
@@ -170,7 +177,7 @@
                 "aaSorting": [],
                 columnDefs: [{
                     orderable: false,
-                }],
+                }],order: [ 3, "desc" ]
             });
             $('.dataTables_length').addClass('bs-select');
         });
@@ -196,7 +203,7 @@
                 "aaSorting": [],
                 columnDefs: [{
                     orderable: false,
-                }],
+                }],order: [ 4, "desc" ]
             });
             $('.dataTables_length').addClass('bs-select');
         });

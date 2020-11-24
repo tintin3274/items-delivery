@@ -114,6 +114,7 @@ public class OrderRequestRestController {
                 itemImport.setImportQuantity(listItem.getQuantity());
                 itemImport.setImportRemark("RETURN");
                 itemImport.setImportDatetime(localDateTimeNow);
+                itemImport.setStaffId(orderRequest.getStaffId());
                 itemImportRepository.saveAndFlush(itemImport);
 
                 Item item = itemRepository.findById(listItemId.getItemId()).get();

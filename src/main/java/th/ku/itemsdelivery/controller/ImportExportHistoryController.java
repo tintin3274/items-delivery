@@ -30,6 +30,7 @@ public class ImportExportHistoryController {
         model.addAttribute("itemsimport",itemService.getItemImportAll());
         model.addAttribute("itemsexport",itemService.getItemExportAll());
         model.addAttribute("dateTimeAdapter",new DateTimeAdapter());
+        model.addAttribute("authen",authenticationService);
 
         String head ="fragments";
         if(authenticationService.getStaffCurrentLogin().getRole().equals("INVENTORY MANAGER")){

@@ -52,6 +52,7 @@ public class SelectQuantityItemController {
         OrderRequest orderRequest = (OrderRequest) request.getSession().getAttribute("order");
         Staff staff = authenticationService.getStaffCurrentLogin();
         orderRequest.setStaffId(staff.getId());
+        System.err.println(orderRequest.toString());
         orderRequest = orderRequestService.createOrderRequest(orderRequest);
 
         int[] itemQty = Arrays.stream(request.getParameterValues("quantity")).mapToInt(Integer::parseInt).toArray();
