@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
-  `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
-  `phone_number` varchar(20) NOT NULL
+  `firstname` text NOT NULL,
+  `lastname` text NOT NULL,
+  `phone_number` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -42,8 +42,8 @@ CREATE TABLE `customer` (
 
 CREATE TABLE `item` (
   `id` int(11) NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `unit` varchar(20) NOT NULL,
+  `name` text NOT NULL,
+  `unit` text NOT NULL,
   `description` text DEFAULT NULL,
   `quantity` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `required` int(10) UNSIGNED NOT NULL DEFAULT 0
@@ -73,7 +73,7 @@ CREATE TABLE `item_import` (
   `item_id` int(11) NOT NULL,
   `import_quantity` int(10) UNSIGNED NOT NULL,
   `import_datetime` timestamp NOT NULL DEFAULT current_timestamp(),
-  `import_remark` varchar(15) NOT NULL DEFAULT 'ARRIVAL'
+  `import_remark` text NOT NULL DEFAULT 'ARRIVAL'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -96,9 +96,9 @@ CREATE TABLE `list_item` (
 
 CREATE TABLE `order_request` (
   `id` int(11) NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `status` varchar(15) NOT NULL DEFAULT 'PENDING',
-  `address` tinytext NOT NULL,
+  `name` text NOT NULL,
+  `status` text NOT NULL DEFAULT 'PENDING',
+  `address` text NOT NULL,
   `description` text DEFAULT NULL,
   `create_datetime` timestamp NOT NULL DEFAULT current_timestamp(),
   `due_datetime` timestamp NOT NULL DEFAULT current_timestamp(),
